@@ -23,7 +23,7 @@
     <main style="flex: 1; padding: 20px;">
         <section id="introduction">
             <h2>Introduction</h2>
-            <p>Welcome to the Frontend Developer Guide. This guide will help you understand the basics of frontend development, including HTML, CSS, and JavaScript.</p>
+            <p>Welcome to the Frontend Developer Guide.<br><br>This guide will help you understand the basics of frontend development, including HTML, CSS, and JavaScript.</p>
         </section>
 
         <section id="first-week">
@@ -47,7 +47,7 @@
                     &lt;/body&gt;
                     &lt;/html&gt;
                 </code></pre>
-                <ul>
+                <ul style="display: grid; gap: 5px;">
                     <li><code>&lt;!DOCTYPE html&gt;</code> -- Says to the browser: Its HTML5.</li>
                     <li><code>&lt;html lang="en"&gt;</code> -- The root element of the HTML document, with a language attribute set to English.</li>
                     <li><code>&lt;head&gt;</code> -- Contains meta-information about the document, such as character encoding and viewport settings.</li>
@@ -61,7 +61,7 @@
             <article style="margin-bottom: 24px;">
                 <h3>2. HTML Elements</h3>
                 <p>HTML elements are the building blocks of web pages. They are represented by tags, which define the structure and content of the page.</p>
-                <ul>
+                <ul style="display: grid; gap: 5px;">
                     <li><code>&lt;h1&gt; to &lt;h6&gt;</code> -- Heading elements, with <code>&lt;h1&gt;</code> being the most important and <code>&lt;h6&gt;</code> the least.</li>
                     <li><code>&lt;p&gt;</code> -- Paragraph element, used for blocks of text.</li>
                     <li><code>&lt;a&gt;</code> -- Anchor element, used for creating hyperlinks to other pages or resources.</li>
@@ -83,7 +83,7 @@
             <article style="margin-bottom: 24px;">
                 <h3>3. Semantic HTML5</h3>
                 <p>Semantic HTML5 elements provide meaning to the structure of a webpage, making it easier for browsers and assistive technologies to understand the content.</p>
-                <ul>
+                <ul style="display: grid; gap: 5px;">
                     <li><code>&lt;header&gt;</code> -- Represents introductory content or a set of navigational links.</li>
                     <li><code>&lt;nav&gt;</code> -- Represents a section of the page intended for navigation links.</li>
                     <li><code>&lt;main&gt;</code> -- Represents the main content of the document, unique to the page.</li>
@@ -124,18 +124,65 @@
             <article style="margin-bottom: 24px;">
                 <h3>4. HTML Forms</h3>
                 <p>HTML forms are used to collect user input. They can include various types of input elements, such as text fields, checkboxes, radio buttons, and submit buttons.</p>
-                <ul>
-                    <li><code>&lt;form&gt;</code> -- The container for form elements</li><br>
-                    <li><code>&lt;input type="text"&gt;</code> -- A single-line text input field.<br>Like: <input type="text"></li><br>
-                    <li><code>&lt;input type="password"&gt;</code> -- A password input field that masks the entered characters.<br>Like: <input type="password"></li><br>
-                    <li><code>&lt;input type="checkbox"&gt;</code> -- A checkbox input for selecting multiple options.<br>Like: <input type="checkbox"></li><br>
-                    <li><code>&lt;input type="radio"&gt;</code> -- A radio button input for selecting one option from a group.<br>Like: <input type="radio"></li><br>
-                    <li><code>&lt;textarea&gt;</code> -- A multi-line text input field.<br>Like: <textarea></textarea></li><br>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>&lt;form&gt;</code> -- The container for form elements</li>
+                    <li><code>&lt;input type="text"&gt;</code> -- A single-line text input field.<br>Like: <input type="text"></li>
+                    <li><code>&lt;input type="password"&gt;</code> -- A password input field that masks the entered characters.<br>Like: <input type="password"></li>
+                    <li><code>&lt;input type="checkbox"&gt;</code> -- A checkbox input for selecting multiple options.<br>Like: <input type="checkbox"></li>
+                    <li><code>&lt;input type="radio"&gt;</code> -- A radio button input for selecting one option from a group.<br>Like: <input type="radio"></li>
+                    <li><code>&lt;textarea&gt;</code> -- A multi-line text input field.<br>Like: <textarea></textarea></li>
                     <li><code>&lt;button type="submit"&gt;</code> -- A button that submits the form data to the server.<br>Like: <button type="submit">Submit</button></li>
                 </ul>
             </article>
 
+            <article style="margin-bottom: 24px;">
+                <h3>5. Keys attributes</h3>
+                <p>Some key attributes in HTML include:</p>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>id</code> -- A unique identifier for an element, used for styling and scripting.</li>
+                    <li><code>class</code> -- A class name that can be shared by multiple elements, used for styling and scripting.</li>
+                    <li><code>src</code> -- Specifies the source URL for media elements like images and scripts.</li>
+                    <li><code>href</code> -- Specifies the URL for anchor elements, linking to other pages or resources.</li>
+                    <li><code>alt</code> -- Provides alternative text for images, improving accessibility.</li>
+                    <li><code>title</code> -- Provides additional information about an element, often displayed as a tooltip.</li>
+                </ul>
+            </article>
 
+            <article style="margin-bottom:24px;">
+                <h3>6. HTML Tables</h3>
+                <p>HTML tables are used to display tabular data. They consist of rows and columns defined by various table elements.</p>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>&lt;table&gt;</code> -- The container for table elements.</li>
+                    <li><code>&lt;tr&gt;</code> -- Defines a table row.</li>
+                    <li><code>&lt;th&gt;</code> -- Defines a table header cell.</li>
+                    <li><code>&lt;td&gt;</code> -- Defines a table data cell.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom:24px;">
+                <h3>7. HTML Media</h3>
+                <p>HTML media elements allow you to embed audio and video content into your web pages.</p>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>&lt;audio&gt;</code> -- Embeds audio content, with controls for playback.</li>
+                    <li><code>&lt;video&gt;</code> -- Embeds video content, with controls for playback.</li>
+                    <li><code>&lt;source&gt;</code> -- Specifies multiple media sources for audio and video elements.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom:24px;">
+                <h3>8. HTML Iframes</h3>
+                <p>HTML iframes allow you to embed another HTML document within the current page.</p>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>&lt;iframe&gt;</code> -- Embeds an external HTML document within the current page.</li>
+                    <li><code>src</code> -- Specifies the URL of the document to be embedded.</li>
+                    <li><code>width</code> and <code>height</code> -- Define the dimensions of the iframe.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom:24px;">
+                <h3>Summary</h3>
+                <p>In summary, HTML is the foundation of web development, providing the structure and content of web pages. Understanding HTML elements, attributes, and semantic structure is essential for creating accessible and well-structured websites.</p>
+            </article>
         </section>
 
         <section id="second-week">
