@@ -7,27 +7,163 @@
     <title>Frontend Developer Guide</title>
 </head>
 
-<body>
-    <header>
+<body style="margin: 0; background-color: #ebe6e6; font-family: 'Spezia', sans-serif;">
+    <header style="background-color: #65686d; padding: 15px;">
         <h1>Frontend Developer Guide</h1>
     </header>
+<div style="display: flex; min-height: calc(100vh - 60px);">
+    <nav style="width: 200px; background-color: #5d9ee9; padding: 20px;">
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#first-week">Week 1 - HTML Structure</a></li>
+            <li><a href="#second-week">Week 2 - CSS Styling</a></li>
+        </ul>
+    </nav>
 
-<main>
-    <section>
-        <h2>Introduction</h2>
-        <p>Welcome to the Frontend Developer Guide. This guide will help you understand the basics of frontend development, including HTML, CSS, and JavaScript.</p>
-    </section>
-</main>
+    <main style="flex: 1; padding: 20px;">
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>Welcome to the Frontend Developer Guide. This guide will help you understand the basics of frontend development, including HTML, CSS, and JavaScript.</p>
+        </section>
+
+        <section id="first-week">
+            <h2>Week 1 - HTML Structure</h2>
+
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXraRTfjWnLwryD-mtiCMrmapAAq3NWOgmGM2oNTeOg&s" alt="Beginning meme" style="max-width: 100%; height: auto;">
+
+            <article style="margin-bottom: 24px;">
+                <h3>1. First of all</h3>
+                <p>Each .html file has to start with this structure:</p>
+                <pre><code>
+                    &lt;!DOCTYPE html&gt;
+                    &lt;html lang="en"&gt;
+                    &lt;head&gt;
+                        &lt;meta charset="UTF-8"&gt;
+                        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                        &lt;title&gt;Your Page Title&lt;/title&gt;
+                    &lt;/head&gt;
+                    &lt;body&gt;
+                        &lt;!-- Your content goes here --&gt;
+                    &lt;/body&gt;
+                    &lt;/html&gt;
+                </code></pre>
+                <ul>
+                    <li><code>&lt;!DOCTYPE html&gt;</code> -- Says to the browser: Its HTML5.</li>
+                    <li><code>&lt;html lang="en"&gt;</code> -- The root element of the HTML document, with a language attribute set to English.</li>
+                    <li><code>&lt;head&gt;</code> -- Contains meta-information about the document, such as character encoding and viewport settings.</li>
+                    <li><code>&lt;meta charset="UTF-8"&gt;</code> -- Specifies the character encoding for the document, ensuring that it can display a wide range of characters correctly.</li>
+                    <li><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> -- Ensures that the webpage is responsive and scales correctly on different devices, particularly mobile devices.</li>
+                    <li><code>&lt;title&gt;Your Page Title&lt;/title&gt;</code> -- Sets the title of the webpage, which appears in the browser tab and is important for SEO.</li>
+                    <li><code>&lt;body&gt;</code> -- Contains the content of the HTML document that is visible to users, such as text, images, and other elements.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>2. HTML Elements</h3>
+                <p>HTML elements are the building blocks of web pages. They are represented by tags, which define the structure and content of the page.</p>
+                <ul>
+                    <li><code>&lt;h1&gt; to &lt;h6&gt;</code> -- Heading elements, with <code>&lt;h1&gt;</code> being the most important and <code>&lt;h6&gt;</code> the least.</li>
+                    <li><code>&lt;p&gt;</code> -- Paragraph element, used for blocks of text.</li>
+                    <li><code>&lt;a&gt;</code> -- Anchor element, used for creating hyperlinks to other pages or resources.</li>
+                    <li><code>&lt;img&gt;</code> -- Image element, used to embed images in the page.</li>
+                    <li><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and <code>&lt;li&gt;</code> -- List elements, used for unordered and ordered lists.</li>
+                    <li><code>&lt;div&gt;</code> -- Division element, used as a container for grouping other elements together.</li>
+                    <li><code>&lt;span&gt;</code> -- Inline container element, used for styling or grouping text within other elements.</li>
+                    <li><code>&lt;form&gt;</code> -- Form element, used for collecting user input through various form controls.</li>
+                    <li><code>&lt;input&gt;</code> -- Input element, used for various types of user input within a form.</li>
+                    <li><code>&lt;button&gt;</code> -- Button element, used to create clickable buttons for user interaction.</li>
+                    <li><code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code> -- Table elements, used for displaying tabular data.</li>
+                    <li><code>&lt;iframe&gt;</code> -- Inline frame element, used to embed another HTML page within the current page.</li>
+                    <li><code>&lt;script&gt;</code> -- Script element, used to include JavaScript code in the page.</li>
+                    <li><code>&lt;a href="URL"&gt;</code> -- Anchor element with a hyperlink reference, used to link to other pages or resources.</li>
+                    <li><code>&lt;link&gt;</code> -- Link element, used to link external resources like CSS files.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>3. Semantic HTML5</h3>
+                <p>Semantic HTML5 elements provide meaning to the structure of a webpage, making it easier for browsers and assistive technologies to understand the content.</p>
+                <ul>
+                    <li><code>&lt;header&gt;</code> -- Represents introductory content or a set of navigational links.</li>
+                    <li><code>&lt;nav&gt;</code> -- Represents a section of the page intended for navigation links.</li>
+                    <li><code>&lt;main&gt;</code> -- Represents the main content of the document, unique to the page.</li>
+                    <li><code>&lt;section&gt;</code> -- Represents a standalone section of content, typically with a heading.</li>
+                    <li><code>&lt;article&gt;</code> -- Represents a self-contained piece of content that could be distributed independently.</li>
+                    <li><code>&lt;aside&gt;</code> -- Represents content that is tangentially related to the main content, such as sidebars or callouts.</li>
+                    <li><code>&lt;footer&gt;</code> -- Represents footer content for its nearest sectioning element, often containing metadata or links.</li>
+                
+                    <table style="width: 100%; align: left; border-collapse: collapse; margin-top: 20px;">
+                        <thead>
+                           <tr>
+                             <th style="text-align: left;">Tag</th>
+                             <th style="text-align: left;">When to use</th>
+                             <th style="text-align: left;">When NOT to use</th>
+                         </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code><strong>div</strong></code></td>
+                                <td>Layout wrapper, use when no semantic element is suitable.</td>
+                                <td>Instead of section/article/nav</td>
+                            </tr>
+                            <tr>
+                                <td><code><strong>section</strong></code></td>
+                                <td>Grouping related content, typically with a heading.</td>
+                                <td>For generic containers without a specific purpose.</td>
+                            </tr>
+                            <tr>
+                                <td><code><strong>article</strong></code></td>
+                                <td>Self-contained content that could be distributed independently.</td>
+                                <td>For content that is not independent or standalone.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ul>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>4. HTML Forms</h3>
+                <p>HTML forms are used to collect user input. They can include various types of input elements, such as text fields, checkboxes, radio buttons, and submit buttons.</p>
+                <ul>
+                    <li><code>&lt;form&gt;</code> -- The container for form elements</li><br>
+                    <li><code>&lt;input type="text"&gt;</code> -- A single-line text input field.<br>Like: <input type="text"></li><br>
+                    <li><code>&lt;input type="password"&gt;</code> -- A password input field that masks the entered characters.<br>Like: <input type="password"></li><br>
+                    <li><code>&lt;input type="checkbox"&gt;</code> -- A checkbox input for selecting multiple options.<br>Like: <input type="checkbox"></li><br>
+                    <li><code>&lt;input type="radio"&gt;</code> -- A radio button input for selecting one option from a group.<br>Like: <input type="radio"></li><br>
+                    <li><code>&lt;textarea&gt;</code> -- A multi-line text input field.<br>Like: <textarea></textarea></li><br>
+                    <li><code>&lt;button type="submit"&gt;</code> -- A button that submits the form data to the server.<br>Like: <button type="submit">Submit</button></li>
+                </ul>
+            </article>
 
 
+        </section>
 
+        <section id="second-week">
+            <h2>Week 2 - CSS Styling</h2>
+            <p>In the second week, you will learn about CSS styling, including selectors, properties, and responsive design techniques.</p>
+        </section>
+    </main>
+</div>
 
+<script>
+  const sections = document.querySelectorAll('main section');
+  const links = document.querySelectorAll('nav a');
 
+  sections.forEach(section => section.style.display = 'none');
+  sections[0].style.display = 'block';
 
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      sections.forEach(section => section.style.display = 'none');
+      const target = document.querySelector(this.getAttribute('href'));
+      target.style.display = 'block';
+    });
+  });
+</script>
 
-
-
-
-
+<footer style="background-color: #65686d; padding: 15px; text-align: center;">
+    <p>&copy; 2026 Frontend Developer Guide. All rights reserved.</p>
+</footer>
 </body>
 </html>
