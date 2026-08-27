@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guide covering the basics of frontend development: HTML, CSS, and JavaScript.">
+    <link rel="icon" href="data:,">
     <title>Frontend Developer Guide</title>
 </head>
 
@@ -29,7 +31,9 @@
         <section id="first-week">
             <h2>Week 1 - HTML Structure</h2>
 
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXraRTfjWnLwryD-mtiCMrmapAAq3NWOgmGM2oNTeOg&s" alt="Beginning meme" style="max-width: 100%; height: auto;">
+            <figure>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXraRTfjWnLwryD-mtiCMrmapAAq3NWOgmGM2oNTeOg&s" alt="Beginning meme" style="max-width: 100%; height: auto;">
+            </figure>
 
             <article style="margin-bottom: 24px;">
                 <h3>1. First of all</h3>
@@ -89,7 +93,7 @@
                     <li><code>&lt;aside&gt;</code> -- Represents content that is tangentially related to the main content, such as sidebars or callouts.</li>
                     <li><code>&lt;footer&gt;</code> -- Represents footer content for its nearest sectioning element, often containing metadata or links.</li>
                 </ul>
-                <table style="width: 100%; align: left; border-collapse: collapse; margin-top: 20px;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                     <thead>
                         <tr>
                             <th style="text-align: left;">Tag</th>
@@ -155,7 +159,7 @@
                             <option value="support">Support</option>
                             <option value="feedback">Feedback</option>
                         </select><br><br>
-                        <label>Are you sure?</label><br>
+                        <p>Are you sure?</p>
                         <label for="confirmation">Yes, I confirm</label>
                         <input type="checkbox" id="confirmation" name="confirmation" value="yes" required><br><br>
                         <button type="submit">Submit</button>
@@ -205,6 +209,24 @@
                     <li><code>&lt;iframe&gt;</code> -- Embeds an external HTML document within the current page.</li>
                     <li><code>src</code> -- Specifies the URL of the document to be embedded.</li>
                     <li><code>width</code> and <code>height</code> -- Define the dimensions of the iframe.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom:24px;">
+                <h3>9. More useful elements</h3>
+                <p>A few extra elements that come up often and are good to know:</p>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> -- Groups media (like an image) together with a caption describing it.</li>
+                    <li><code>&lt;blockquote&gt;</code> -- Marks a section as a quotation from another source.</li>
+                    <li><code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> -- Creates a native expandable/collapsible section, no JavaScript needed.<br>Like:
+                        <details>
+                            <summary>Click to expand</summary>
+                            Hidden content revealed on click.
+                        </details>
+                    </li>
+                    <li><code>&lt;abbr title="..."&gt;</code> -- Marks an abbreviation, showing the full meaning as a tooltip on hover.<br>Like: <abbr title="HyperText Markup Language">HTML</abbr></li>
+                    <li><code>&lt;time datetime="..."&gt;</code> -- Marks a date/time in a machine-readable format.</li>
+                    <li><code>&lt;!-- comment --&gt;</code> -- A comment, ignored by the browser, visible only in the source code.</li>
                 </ul>
             </article>
 
