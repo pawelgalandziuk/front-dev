@@ -34,19 +34,17 @@
             <article style="margin-bottom: 24px;">
                 <h3>1. First of all</h3>
                 <p>Each .html file has to start with this structure:</p>
-                <pre><code>
-                    &lt;!DOCTYPE html&gt;
-                    &lt;html lang="en"&gt;
-                    &lt;head&gt;
-                        &lt;meta charset="UTF-8"&gt;
-                        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-                        &lt;title&gt;Your Page Title&lt;/title&gt;
-                    &lt;/head&gt;
-                    &lt;body&gt;
-                        &lt;!-- Your content goes here --&gt;
-                    &lt;/body&gt;
-                    &lt;/html&gt;
-                </code></pre>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Your Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Your content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
                 <ul style="display: grid; gap: 5px;">
                     <li><code>&lt;!DOCTYPE html&gt;</code> -- Says to the browser: Its HTML5.</li>
                     <li><code>&lt;html lang="en"&gt;</code> -- The root element of the HTML document, with a language attribute set to English.</li>
@@ -90,34 +88,33 @@
                     <li><code>&lt;article&gt;</code> -- Represents a self-contained piece of content that could be distributed independently.</li>
                     <li><code>&lt;aside&gt;</code> -- Represents content that is tangentially related to the main content, such as sidebars or callouts.</li>
                     <li><code>&lt;footer&gt;</code> -- Represents footer content for its nearest sectioning element, often containing metadata or links.</li>
-
-                    <table style="width: 100%; align: left; border-collapse: collapse; margin-top: 20px;">
-                        <thead>
-                           <tr>
-                             <th style="text-align: left;">Tag</th>
-                             <th style="text-align: left;">When to use</th>
-                             <th style="text-align: left;">When NOT to use</th>
-                         </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code><strong>div</strong></code></td>
-                                <td>Layout wrapper, use when no semantic element is suitable.</td>
-                                <td>Instead of section/article/nav</td>
-                            </tr>
-                            <tr>
-                                <td><code><strong>section</strong></code></td>
-                                <td>Grouping related content, typically with a heading.</td>
-                                <td>For generic containers without a specific purpose.</td>
-                            </tr>
-                            <tr>
-                                <td><code><strong>article</strong></code></td>
-                                <td>Self-contained content that could be distributed independently.</td>
-                                <td>For content that is not independent or standalone.</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </ul>
+                <table style="width: 100%; align: left; border-collapse: collapse; margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Tag</th>
+                            <th style="text-align: left;">When to use</th>
+                            <th style="text-align: left;">When NOT to use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code><strong>div</strong></code></td>
+                            <td>Layout wrapper, use when no semantic element is suitable.</td>
+                            <td>Instead of section/article/nav</td>
+                        </tr>
+                        <tr>
+                            <td><code><strong>section</strong></code></td>
+                            <td>Grouping related content, typically with a heading.</td>
+                            <td>For generic containers without a specific purpose.</td>
+                        </tr>
+                        <tr>
+                            <td><code><strong>article</strong></code></td>
+                            <td>Self-contained content that could be distributed independently.</td>
+                            <td>For content that is not independent or standalone.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </article>
 
             <article style="margin-bottom: 24px;">
@@ -133,6 +130,7 @@
                     <li><code>&lt;button type="submit"&gt;</code> -- A button that submits the form data to the server.<br>Like: <button type="submit">Submit</button></li>
                 </ul>
 
+                <!-- action="/submit" is a placeholder, there is no real server endpoint for now -->
                 <form action="/submit" method="POST">
                     <fieldset>
                         <legend><b>Example form:</b></legend>
@@ -145,7 +143,7 @@
                         <fieldset>
                             <legend>Sex:</legend>
                             <label for="male">Male</label>
-                            <input type="radio" id="male" name="sex" value="male">
+                            <input type="radio" id="male" name="sex" value="male" required>
                             <label for="female">Female</label>
                             <input type="radio" id="female" name="sex" value="female">
                         </fieldset><br><br>
@@ -227,15 +225,15 @@
   const sections = document.querySelectorAll('main section');
   const links = document.querySelectorAll('nav a');
 
-  sections.forEach(section => section.style.display = 'none');
-  sections[0].style.display = 'block';
+  sections.forEach(section => section.hidden = true);
+  sections[0].hidden = false;
 
   links.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      sections.forEach(section => section.style.display = 'none');
+      sections.forEach(section => section.hidden = true);
       const target = document.querySelector(this.getAttribute('href'));
-      target.style.display = 'block';
+      target.hidden = false;
     });
   });
 </script>
