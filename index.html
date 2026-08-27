@@ -132,34 +132,37 @@
                     <li><code>&lt;textarea&gt;</code> -- A multi-line text input field.<br>Like: <textarea></textarea></li>
                     <li><code>&lt;button type="submit"&gt;</code> -- A button that submits the form data to the server.<br>Like: <button type="submit">Submit</button></li>
                 </ul>
-                <p><b>Example form:</b></p>
+
                 <form action="/submit" method="POST">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email"><br><br>
-                    <label for="phone">Phone:</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone"><br><br>
                     <fieldset>
-                        <legend>Sex:</legend>
-                        <label for="male">Male</label>
-                        <input type="radio" id="male" name="sex" value="male">
-                        <label for="female">Female</label>
-                        <input type="radio" id="female" name="sex" value="female">
-                    </fieldset><br><br>
-                    <label for="message">Message:</label><br>
-                    <textarea id="message" name="message" placeholder="Enter your message"></textarea><br><br>
-                    <label for="topic">Topic:</label>
-                    <select id="topic" name="topic">
-                        <option value="general">General Inquiry</option>
-                        <option value="support">Support</option>
-                        <option value="feedback">Feedback</option>
-                    </select><br><br>
-                    <label>Are you sure?</label><br>
-                    <label for="confirmation">Yes, I confirm</label>
-                    <input type="checkbox" id="confirmation" name="confirmation" value="yes" required><br><br>
-                    <button type="submit">Submit</button>
-                    <button type="reset">Reset</button>
+                        <legend><b>Example form:</b></legend>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email"><br><br>
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone"><br><br>
+                        <fieldset>
+                            <legend>Sex:</legend>
+                            <label for="male">Male</label>
+                            <input type="radio" id="male" name="sex" value="male">
+                            <label for="female">Female</label>
+                            <input type="radio" id="female" name="sex" value="female">
+                        </fieldset><br><br>
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" placeholder="Enter your message"></textarea><br><br>
+                        <label for="topic">Topic:</label>
+                        <select id="topic" name="topic">
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Support</option>
+                            <option value="feedback">Feedback</option>
+                        </select><br><br>
+                        <label>Are you sure?</label><br>
+                        <label for="confirmation">Yes, I confirm</label>
+                        <input type="checkbox" id="confirmation" name="confirmation" value="yes" required><br><br>
+                        <button type="submit">Submit</button>
+                        <button type="reset">Reset</button>
+                    </fieldset>
                 </form>
             </article>
 
