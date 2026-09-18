@@ -7,10 +7,11 @@
     <meta name="description" content="Guide covering the basics of frontend development: HTML, CSS, and JavaScript.">
     <link rel="icon" href="data:,">
     <title>Frontend Developer Guide</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body style="margin: 0; background-color: #ebe6e6; font-family: 'Spezia', sans-serif;">
-    <header style="background-color: #65686d; padding: 15px;">
+<body>
+    <header>
         <h1>Frontend Developer Guide</h1>
     </header>
 <div style="display: flex; min-height: calc(100vh - 60px);">
@@ -247,7 +248,418 @@
 
         <section id="second-week">
             <h2>Week 2 - CSS Styling</h2>
-            <p>In the second week, you will learn about CSS styling, including selectors, properties, and responsive design techniques.</p>
+            <p>CSS (Cascading Style Sheets) controls how HTML elements look and how they are arranged on a page. It is used for colors, fonts, spacing, borders, sizes, and layouts.</p>
+
+            <article style="margin-bottom: 24px;">
+                <h3>1. CSS Syntax</h3>
+                <p>A CSS rule consists of a selector and one or more declarations:</p>
+                <pre><code>selector {
+    property: value;
+}</code></pre>
+                <p>For example:</p>
+                <pre><code>p {
+    color: navy;
+    font-size: 1rem;
+}</code></pre>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>p</code> -- The selector. It chooses which HTML elements will be styled.</li>
+                    <li><code>color</code> and <code>font-size</code> -- Properties that describe what will change.</li>
+                    <li><code>navy</code> and <code>1rem</code> -- Values assigned to the properties.</li>
+                    <li><code>;</code> -- Separates declarations. It should be added after every declaration.</li>
+                </ul>
+                <p>CSS comments are written like this:</p>
+                <pre><code>/* This is a CSS comment */</code></pre>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>2. Three Ways to Add CSS</h3>
+                <h4>Inline CSS</h4>
+                <pre><code>&lt;p style="color: red;"&gt;Red text&lt;/p&gt;</code></pre>
+                <p>Inline CSS affects one element. It is useful for quick experiments, but it becomes difficult to maintain when used throughout a page.</p>
+
+                <h4>Internal CSS</h4>
+                <pre><code>&lt;head&gt;
+    &lt;style&gt;
+        p {
+            color: red;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+                <p>Internal CSS is placed inside a <code>&lt;style&gt;</code> element in the document's <code>&lt;head&gt;</code>. It is suitable for small pages and exercises.</p>
+
+                <h4>External CSS</h4>
+                <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+                <p>The link is placed inside <code>&lt;head&gt;</code>, while the rules are stored in a separate <code>style.css</code> file:</p>
+                <pre><code>p {
+    color: red;
+}</code></pre>
+                <p>An external stylesheet is usually the best option because it separates the HTML structure from its appearance and can be reused by multiple pages.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>3. CSS Selectors</h3>
+                <p>Selectors tell the browser which elements should receive a set of styles.</p>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>p { ... }</code> -- Selects every <code>&lt;p&gt;</code> element.</li>
+                    <li><code>.card { ... }</code> -- Selects every element with <code>class="card"</code>. Classes can be reused.</li>
+                    <li><code>#contact { ... }</code> -- Selects the element with <code>id="contact"</code>. An ID must be unique on the page.</li>
+                    <li><code>.card p { ... }</code> -- Selects every paragraph located inside an element with the <code>card</code> class.</li>
+                    <li><code>h1, h2, h3 { ... }</code> -- Applies the same declarations to several selectors.</li>
+                    <li><code>* { ... }</code> -- The universal selector; it selects every element.</li>
+                </ul>
+                <p>Use classes for reusable styles. IDs are mainly useful for unique page targets, labels, and JavaScript hooks.</p>
+                <pre><code>&lt;article class="card featured" id="first-card"&gt;
+    Card content
+&lt;/article&gt;</code></pre>
+                <p>An element may have more than one class, separated by spaces.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>4. Pseudo-classes</h3>
+                <p>A pseudo-class selects an element in a particular state:</p>
+                <pre><code>a:hover {
+    color: red;
+}
+
+input:focus {
+    outline: 3px solid royalblue;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+li:first-child {
+    font-weight: bold;
+}</code></pre>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>:hover</code> -- The pointer is over the element.</li>
+                    <li><code>:focus</code> -- The element has keyboard or input focus.</li>
+                    <li><code>:focus-visible</code> -- Focus should be visibly indicated, usually during keyboard navigation.</li>
+                    <li><code>:active</code> -- The element is currently being activated, for example while a button is pressed.</li>
+                    <li><code>:first-child</code> and <code>:last-child</code> -- Select an element according to its position among siblings.</li>
+                </ul>
+                <p>Never remove a focus outline without providing another clearly visible focus style. Keyboard users need it to know which control is active.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>5. The Cascade, Specificity, and Inheritance</h3>
+                <p>The word "cascading" describes how the browser chooses between competing rules. It considers importance, selector specificity, and source order.</p>
+                <ol style="display: grid; gap: 5px;">
+                    <li>Inline styles are more specific than ordinary stylesheet rules.</li>
+                    <li>An ID selector such as <code>#warning</code> is more specific than a class.</li>
+                    <li>A class or pseudo-class such as <code>.note</code> or <code>:hover</code> is more specific than an element selector.</li>
+                    <li>An element selector such as <code>p</code> has the lowest specificity in this list.</li>
+                    <li>When specificity is equal, the rule written later wins.</li>
+                </ol>
+                <pre><code>p { color: blue; }
+.note { color: green; }
+#warning { color: red; }</code></pre>
+                <p>A paragraph with both <code>class="note"</code> and <code>id="warning"</code> will be red. Avoid <code>!important</code> in normal code because it makes future overrides harder.</p>
+                <p>Some properties, especially <code>color</code> and <code>font-family</code>, are inherited by child elements. Layout properties such as <code>margin</code>, <code>padding</code>, and <code>border</code> are generally not inherited.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>6. The Box Model</h3>
+                <p>Every HTML element is treated as a rectangular box made of four layers:</p>
+                <ol style="display: grid; gap: 5px;">
+                    <li><code>content</code> -- The text, image, or other content.</li>
+                    <li><code>padding</code> -- Space between the content and border.</li>
+                    <li><code>border</code> -- The line surrounding the padding and content.</li>
+                    <li><code>margin</code> -- Space outside the border, separating the element from its neighbors.</li>
+                </ol>
+                <pre><code>.card {
+    width: 300px;
+    padding: 20px;
+    border: 2px solid black;
+    margin: 30px;
+}</code></pre>
+                <p>With the default <code>content-box</code> sizing, the visible width is <code>300px + 40px padding + 4px border = 344px</code>. Margin adds space around that box.</p>
+                <p>A common reset makes declared widths include the padding and border:</p>
+                <pre><code>* {
+    box-sizing: border-box;
+}</code></pre>
+                <p>With <code>border-box</code>, the same element has a total visible width of <code>300px</code>.</p>
+
+                <h4>Spacing shorthand</h4>
+                <pre><code>padding: 20px;                 /* all sides */
+padding: 10px 20px;            /* top/bottom, left/right */
+padding: 10px 20px 30px;       /* top, left/right, bottom */
+padding: 10px 20px 30px 40px;  /* top, right, bottom, left */</code></pre>
+                <p>The same shorthand rules apply to <code>margin</code>. Individual sides can be set with properties such as <code>margin-top</code>, <code>padding-left</code>, and <code>border-bottom</code>.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>7. Width and Height</h3>
+                <pre><code>.container {
+    width: 90%;
+    max-width: 1000px;
+    min-height: 300px;
+    margin: 0 auto;
+}</code></pre>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>width</code> and <code>height</code> -- Set preferred dimensions.</li>
+                    <li><code>min-width</code> and <code>min-height</code> -- Prevent an element from becoming smaller than a limit.</li>
+                    <li><code>max-width</code> and <code>max-height</code> -- Prevent an element from becoming larger than a limit.</li>
+                    <li><code>margin: 0 auto</code> -- Horizontally centers a block that has a limited width.</li>
+                </ul>
+                <p>Avoid a fixed <code>height</code> for text containers unless it is truly required. Growing content can overflow a box with a fixed height.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>8. CSS Units</h3>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>px</code> -- A fixed CSS pixel. It is useful for borders and small visual details.</li>
+                    <li><code>%</code> -- A percentage usually calculated from a related size of the parent element.</li>
+                    <li><code>rem</code> -- Relative to the root <code>&lt;html&gt;</code> font size. By default, <code>1rem</code> is usually <code>16px</code>.</li>
+                    <li><code>em</code> -- Relative to the current element's font size. It is useful when spacing should scale with a component's text.</li>
+                </ul>
+                <pre><code>h1 {
+    font-size: 2rem;
+}
+
+button {
+    font-size: 1rem;
+    padding: 0.5em 1em;
+}
+
+img {
+    width: 100%;
+}</code></pre>
+                <p>A practical starting point is to use <code>rem</code> for typography and most spacing, percentages for flexible widths, <code>px</code> for fine details, and <code>em</code> for dimensions tied to a component's font size.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>9. Colors</h3>
+                <p><code>color</code> changes the foreground text color, while <code>background-color</code> changes the background.</p>
+                <pre><code>.example {
+    color: #222222;
+    background-color: rgb(245, 245, 245);
+    border-color: hsl(210, 50%, 40%);
+}</code></pre>
+                <p>Common color formats include named colors such as <code>red</code>, hexadecimal values such as <code>#ff0000</code>, <code>rgb()</code>, <code>rgba()</code> with transparency, and <code>hsl()</code>.</p>
+                <p>Repeated colors can be stored in custom properties:</p>
+                <pre><code>:root {
+    --color-primary: #176b4d;
+    --color-text: #202020;
+    --color-background: #f4f1ea;
+}
+
+body {
+    color: var(--color-text);
+    background-color: var(--color-background);
+}</code></pre>
+                <p>Always maintain strong contrast between text and its background so that the content remains readable.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>10. Fonts and Text</h3>
+                <pre><code>body {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+}</code></pre>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>font-family</code> -- Sets the typeface. Provide fallback fonts and finish with a generic family such as <code>serif</code> or <code>sans-serif</code>.</li>
+                    <li><code>font-size</code> -- Sets the text size.</li>
+                    <li><code>font-weight</code> -- Sets thickness, commonly <code>400</code> for regular and <code>700</code> for bold.</li>
+                    <li><code>line-height</code> -- Controls vertical space between lines.</li>
+                    <li><code>text-align</code> -- Aligns inline content left, right, or center.</li>
+                    <li><code>text-decoration</code> -- Adds or removes decorations such as underlines.</li>
+                    <li><code>text-transform</code> -- Changes capitalization, for example with <code>uppercase</code>.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>11. Block, Inline, and Display</h3>
+                <p>Block elements such as <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;p&gt;</code> normally begin on a new line and use the available width. Inline elements such as <code>&lt;span&gt;</code> and <code>&lt;a&gt;</code> flow within a line and use only the space their content needs.</p>
+                <pre><code>a {
+    display: inline-block;
+}
+
+.hidden {
+    display: none;
+}</code></pre>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>display: block</code> -- Creates a block-level box.</li>
+                    <li><code>display: inline</code> -- Creates an inline box; width and height do not behave like they do on a block.</li>
+                    <li><code>display: inline-block</code> -- Flows inline but accepts dimensions and padding like a block.</li>
+                    <li><code>display: none</code> -- Removes the element from both the page and its layout.</li>
+                    <li><code>display: flex</code> -- Turns an element into a Flexbox container.</li>
+                </ul>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>12. Flexbox Basics</h3>
+                <p>Flexbox arranges a group of items along one main direction. The parent is the flex container, and its direct children are flex items.</p>
+                <pre><code>&lt;div class="cards"&gt;
+    &lt;article class="card"&gt;First&lt;/article&gt;
+    &lt;article class="card"&gt;Second&lt;/article&gt;
+    &lt;article class="card"&gt;Third&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.cards {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}</code></pre>
+
+                <h4>Direction and axes</h4>
+                <ul style="display: grid; gap: 5px;">
+                    <li><code>row</code> -- Items run horizontally. This is the default.</li>
+                    <li><code>row-reverse</code> -- Items run horizontally in reverse order.</li>
+                    <li><code>column</code> -- Items run vertically.</li>
+                    <li><code>column-reverse</code> -- Items run vertically in reverse order.</li>
+                </ul>
+                <p>With <code>flex-direction: row</code>, the main axis is horizontal and the cross axis is vertical. With <code>column</code>, the axes switch.</p>
+
+                <h4>Alignment</h4>
+                <pre><code>.cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}</code></pre>
+                <p><code>justify-content</code> aligns items on the main axis. Common values are <code>flex-start</code>, <code>center</code>, <code>flex-end</code>, <code>space-between</code>, <code>space-around</code>, and <code>space-evenly</code>.</p>
+                <p><code>align-items</code> aligns items on the cross axis. Common values are <code>stretch</code>, <code>flex-start</code>, <code>center</code>, and <code>flex-end</code>.</p>
+
+                <h4>Wrapping and gaps</h4>
+                <pre><code>.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}</code></pre>
+                <p><code>flex-wrap: wrap</code> allows items to move onto a new line when there is not enough room. <code>gap</code> adds consistent spacing between items without requiring margins on every child.</p>
+
+                <h4>Flexible item sizes</h4>
+                <pre><code>.card {
+    flex: 1 1 250px;
+}</code></pre>
+                <p>This is shorthand for <code>flex-grow: 1</code>, <code>flex-shrink: 1</code>, and <code>flex-basis: 250px</code>. The card starts around <code>250px</code> wide, may grow into free space, and may shrink when necessary.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>13. Styling Forms and Interactive Elements</h3>
+                <pre><code>input,
+textarea,
+button {
+    font: inherit;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #777777;
+}
+
+input:focus,
+textarea:focus {
+    outline: 3px solid #9ac7ff;
+    border-color: #145ca8;
+}
+
+button {
+    padding: 0.75em 1.25em;
+    border: 0;
+    background-color: #176b4d;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0f4e38;
+}</code></pre>
+                <p><code>font: inherit</code> gives controls the surrounding font. A visible focus state supports keyboard navigation, and <code>cursor: pointer</code> communicates that a button is clickable.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>14. Responsive Images</h3>
+                <pre><code>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}</code></pre>
+                <p>This prevents an image from becoming wider than its container while preserving its original proportions.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>15. A Useful CSS Foundation</h3>
+                <pre><code>* {
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #f6f3ed;
+    --surface: #ffffff;
+    --text: #202522;
+    --primary: #176b4d;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    flex: 1 1 250px;
+    padding: 1.5rem;
+    border: 1px solid #c8c8c8;
+    background-color: var(--surface);
+}
+
+a:focus-visible {
+    outline: 3px solid #e0a526;
+    outline-offset: 3px;
+}</code></pre>
+                <p>This is a starting point rather than a rule for every project. Change it to suit the content and visual design of the page.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>16. Browser Developer Tools</h3>
+                <p>Press <code>F12</code> or open the browser's developer tools and select the Elements or Inspector tab. Developer tools allow you to:</p>
+                <ul style="display: grid; gap: 5px;">
+                    <li>Inspect which CSS rules apply to an element.</li>
+                    <li>See overridden declarations shown with a line through them.</li>
+                    <li>Edit values temporarily and observe the result immediately.</li>
+                    <li>Inspect an element's box model.</li>
+                    <li>Visualize and debug Flexbox layouts.</li>
+                    <li>Test the page at different viewport widths.</li>
+                </ul>
+                <p>Changes made in developer tools disappear when the page is refreshed, so transfer successful experiments into the stylesheet.</p>
+            </article>
+
+            <article style="margin-bottom: 24px;">
+                <h3>Summary</h3>
+                <p>After this week, you should understand how to attach CSS, write rules with selectors, resolve competing styles, use the box model, choose suitable units, style colors and typography, and build a wrapping layout with Flexbox. You should also be able to explain the difference between margin and padding, classes and IDs, <code>rem</code> and <code>em</code>, and <code>justify-content</code> and <code>align-items</code>.</p>
+            </article>
         </section>
     </main>
 </div>
