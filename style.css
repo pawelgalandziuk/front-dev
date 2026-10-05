@@ -12,3 +12,56 @@ header {
     background-color: #65686d;
     padding: 15px;
 }
+
+.page-layout {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+nav {
+    width: 200px;
+    background-color: #5d9ee9;
+    padding: 20px;
+}
+
+nav ul {
+    display: grid;
+    gap: 10px;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+article {
+    margin-bottom: 24px;
+}
+
+article ul,
+article ol {
+    display: grid;
+    gap: 5px;
+}
+
+article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+article th,
+article tfoot td {
+    text-align: left;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    background-color: #65686d;
+    padding: 15px;
+    text-align: center;
+}

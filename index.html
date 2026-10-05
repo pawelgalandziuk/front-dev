@@ -14,16 +14,16 @@
     <header>
         <h1>Frontend Developer Guide</h1>
     </header>
-<div style="display: flex; min-height: calc(100vh - 60px);">
-    <nav style="width: 200px; background-color: #5d9ee9; padding: 20px;">
-        <ul style="display: grid; gap: 10px">
+<div class="page-layout">
+    <nav>
+        <ul>
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#first-week">Week 1 - HTML Structure</a></li>
             <li><a href="#second-week">Week 2 - CSS Styling</a></li>
         </ul>
     </nav>
 
-    <main style="flex: 1; padding: 20px;">
+    <main>
         <section id="introduction">
             <h2>Introduction</h2>
             <p>Welcome to the Frontend Developer Guide.<br><br>This guide will help you understand the basics of frontend development, including HTML, CSS, and JavaScript.</p>
@@ -34,10 +34,10 @@
 
             <!-- note (can be also used instead of style): width="250" height="250" -->
             <figure>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXraRTfjWnLwryD-mtiCMrmapAAq3NWOgmGM2oNTeOg&s" alt="Beginning meme" style="max-width: 100%; height: auto;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXraRTfjWnLwryD-mtiCMrmapAAq3NWOgmGM2oNTeOg&s" alt="Beginning meme">
             </figure>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>1. First of all</h3>
                 <p>Each .html file has to start with this structure:</p>
                 <pre><code>&lt;!DOCTYPE html&gt;
@@ -51,7 +51,7 @@
     &lt;!-- Your content goes here --&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;!DOCTYPE html&gt;</code> -- Says to the browser: Its HTML5.</li>
                     <li><code>&lt;html lang="en"&gt;</code> -- The root element of the HTML document, with a language attribute set to English.</li>
                     <li><code>&lt;head&gt;</code> -- Contains meta-information about the document, such as character encoding and viewport settings.<br>It can also contain <code>&lt;link&gt;</code>, which is an element used to link external resources like CSS files.</li>
@@ -62,10 +62,10 @@
                 </ul>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>2. HTML Elements</h3>
                 <p>HTML elements are the building blocks of web pages. They are represented by tags, which define the structure and content of the page.</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;h1&gt; to &lt;h6&gt;</code> -- Heading elements, with <code>&lt;h1&gt;</code> being the most important and <code>&lt;h6&gt;</code> the least.</li>
                     <li><code>&lt;p&gt;</code> -- Paragraph element, used for blocks of text.</li>
                     <li><code>&lt;a&gt;</code> -- Anchor element, used for creating hyperlinks to other pages or resources.</li>
@@ -83,10 +83,10 @@
                 </ul>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>3. Semantic HTML5</h3>
                 <p>Semantic HTML5 elements provide meaning to the structure of a webpage, making it easier for browsers and assistive technologies to understand the content.</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;header&gt;</code> -- Represents introductory content or a set of navigational links.</li>
                     <li><code>&lt;nav&gt;</code> -- Represents a section of the page intended for navigation links.</li>
                     <li><code>&lt;main&gt;</code> -- Represents the main content of the document, unique to the page.</li>
@@ -95,12 +95,12 @@
                     <li><code>&lt;aside&gt;</code> -- Represents content that is tangentially related to the main content, such as sidebars or callouts.</li>
                     <li><code>&lt;footer&gt;</code> -- Represents footer content for its nearest sectioning element, often containing metadata or links.</li>
                 </ul>
-                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" border="1">
+                <table>
                     <thead>
                         <tr>
-                            <th style="text-align: left;">Tag</th>
-                            <th style="text-align: left;">When to use</th>
-                            <th style="text-align: left;">When NOT to use</th>
+                            <th>Tag</th>
+                            <th>When to use</th>
+                            <th>When NOT to use</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,16 +122,16 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3" style="text-align: left;">Note: Tfoot is used to group footer content in a table.</td>
+                            <td colspan="3">Note: Tfoot is used to group footer content in a table.</td>
                         </tr>
                     </tfoot>
                 </table>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>4. HTML Forms</h3>
                 <p>HTML forms are used to collect user input. They can include various types of input elements, such as text fields, checkboxes, radio buttons, and submit buttons.</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;form&gt;</code> -- The container for form elements</li>
                     <li><code>&lt;input type="text"&gt;</code> -- A single-line text input field.<br>Like: <input type="text"></li>
                     <li><code>&lt;input type="password"&gt;</code> -- A password input field that masks the entered characters.<br>Like: <input type="password"></li>
@@ -178,10 +178,10 @@
                 </form>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>5. Keys attributes</h3>
                 <p>Some key attributes in HTML include:</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>id</code> -- A unique identifier for an element, used for styling and scripting.</li>
                     <li><code>class</code> -- A class name that can be shared by multiple elements, used for styling and scripting.</li>
                     <li><code>src</code> -- Specifies the source URL for media elements like images and scripts.</li>
@@ -191,10 +191,10 @@
                 </ul>
             </article>
 
-            <article style="margin-bottom:24px;">
+            <article>
                 <h3>6. HTML Tables</h3>
                 <p>HTML tables are used to display tabular data. They consist of rows and columns defined by various table elements.</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;table&gt;</code> -- The container for table elements.</li>
                     <li><code>&lt;tr&gt;</code> -- Defines a table row.</li>
                     <li><code>&lt;th&gt;</code> -- Defines a table header cell.</li>
@@ -202,30 +202,30 @@
                 </ul>
             </article>
 
-            <article style="margin-bottom:24px;">
+            <article>
                 <h3>7. HTML Media</h3>
                 <p>HTML media elements allow you to embed audio and video content into your web pages.</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;audio&gt;</code> -- Embeds audio content, with controls for playback.</li>
                     <li><code>&lt;video&gt;</code> -- Embeds video content, with controls for playback.</li>
                     <li><code>&lt;source&gt;</code> -- Specifies multiple media sources for audio and video elements.</li>
                 </ul>
             </article>
 
-            <article style="margin-bottom:24px;">
+            <article>
                 <h3>8. HTML Iframes</h3>
                 <p>HTML iframes allow you to embed another HTML document within the current page.</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;iframe&gt;</code> -- Embeds an external HTML document within the current page.</li>
                     <li><code>src</code> -- Specifies the URL of the document to be embedded.</li>
                     <li><code>width</code> and <code>height</code> -- Define the dimensions of the iframe.</li>
                 </ul>
             </article>
 
-            <article style="margin-bottom:24px;">
+            <article>
                 <h3>9. More useful elements</h3>
                 <p>A few extra elements that come up often and are good to know:</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>&lt;figure&gt;</code> and <code>&lt;figcaption&gt;</code> -- Groups media (like an image) together with a caption describing it.</li>
                     <li><code>&lt;blockquote&gt;</code> -- Marks a section as a quotation from another source.</li>
                     <li><code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> -- Creates a native expandable/collapsible section, no JavaScript needed.<br>Like:
@@ -240,7 +240,7 @@
                 </ul>
             </article>
 
-            <article style="margin-bottom:24px;">
+            <article>
                 <h3>Summary</h3>
                 <p>In summary, HTML is the foundation of web development, providing the structure and content of web pages. Understanding HTML elements, attributes, and semantic structure is essential for creating accessible and well-structured websites.</p>
             </article>
@@ -250,7 +250,7 @@
             <h2>Week 2 - CSS Styling</h2>
             <p>CSS (Cascading Style Sheets) controls how HTML elements look and how they are arranged on a page. It is used for colors, fonts, spacing, borders, sizes, and layouts.</p>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>1. CSS Syntax</h3>
                 <p>A CSS rule consists of a selector and one or more declarations:</p>
                 <pre><code>selector {
@@ -261,7 +261,7 @@
     color: navy;
     font-size: 1rem;
 }</code></pre>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>p</code> -- The selector. It chooses which HTML elements will be styled.</li>
                     <li><code>color</code> and <code>font-size</code> -- Properties that describe what will change.</li>
                     <li><code>navy</code> and <code>1rem</code> -- Values assigned to the properties.</li>
@@ -271,7 +271,7 @@
                 <pre><code>/* This is a CSS comment */</code></pre>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>2. Three Ways to Add CSS</h3>
                 <h4>Inline CSS</h4>
                 <pre><code>&lt;p style="color: red;"&gt;Red text&lt;/p&gt;</code></pre>
@@ -296,10 +296,10 @@
                 <p>An external stylesheet is usually the best option because it separates the HTML structure from its appearance and can be reused by multiple pages.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>3. CSS Selectors</h3>
                 <p>Selectors tell the browser which elements should receive a set of styles.</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>p { ... }</code> -- Selects every <code>&lt;p&gt;</code> element.</li>
                     <li><code>.card { ... }</code> -- Selects every element with <code>class="card"</code>. Classes can be reused.</li>
                     <li><code>#contact { ... }</code> -- Selects the element with <code>id="contact"</code>. An ID must be unique on the page.</li>
@@ -314,7 +314,7 @@
                 <p>An element may have more than one class, separated by spaces.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>4. Pseudo-classes</h3>
                 <p>A pseudo-class selects an element in a particular state:</p>
                 <pre><code>a:hover {
@@ -332,7 +332,7 @@ button:active {
 li:first-child {
     font-weight: bold;
 }</code></pre>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>:hover</code> -- The pointer is over the element.</li>
                     <li><code>:focus</code> -- The element has keyboard or input focus.</li>
                     <li><code>:focus-visible</code> -- Focus should be visibly indicated, usually during keyboard navigation.</li>
@@ -342,10 +342,10 @@ li:first-child {
                 <p>Never remove a focus outline without providing another clearly visible focus style. Keyboard users need it to know which control is active.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>5. The Cascade, Specificity, and Inheritance</h3>
                 <p>The word "cascading" describes how the browser chooses between competing rules. It considers importance, selector specificity, and source order.</p>
-                <ol style="display: grid; gap: 5px;">
+                <ol>
                     <li>Inline styles are more specific than ordinary stylesheet rules.</li>
                     <li>An ID selector such as <code>#warning</code> is more specific than a class.</li>
                     <li>A class or pseudo-class such as <code>.note</code> or <code>:hover</code> is more specific than an element selector.</li>
@@ -359,10 +359,10 @@ li:first-child {
                 <p>Some properties, especially <code>color</code> and <code>font-family</code>, are inherited by child elements. Layout properties such as <code>margin</code>, <code>padding</code>, and <code>border</code> are generally not inherited.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>6. The Box Model</h3>
                 <p>Every HTML element is treated as a rectangular box made of four layers:</p>
-                <ol style="display: grid; gap: 5px;">
+                <ol>
                     <li><code>content</code> -- The text, image, or other content.</li>
                     <li><code>padding</code> -- Space between the content and border.</li>
                     <li><code>border</code> -- The line surrounding the padding and content.</li>
@@ -389,7 +389,7 @@ padding: 10px 20px 30px 40px;  /* top, right, bottom, left */</code></pre>
                 <p>The same shorthand rules apply to <code>margin</code>. Individual sides can be set with properties such as <code>margin-top</code>, <code>padding-left</code>, and <code>border-bottom</code>.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>7. Width and Height</h3>
                 <pre><code>.container {
     width: 90%;
@@ -397,7 +397,7 @@ padding: 10px 20px 30px 40px;  /* top, right, bottom, left */</code></pre>
     min-height: 300px;
     margin: 0 auto;
 }</code></pre>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>width</code> and <code>height</code> -- Set preferred dimensions.</li>
                     <li><code>min-width</code> and <code>min-height</code> -- Prevent an element from becoming smaller than a limit.</li>
                     <li><code>max-width</code> and <code>max-height</code> -- Prevent an element from becoming larger than a limit.</li>
@@ -406,9 +406,9 @@ padding: 10px 20px 30px 40px;  /* top, right, bottom, left */</code></pre>
                 <p>Avoid a fixed <code>height</code> for text containers unless it is truly required. Growing content can overflow a box with a fixed height.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>8. CSS Units</h3>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>px</code> -- A fixed CSS pixel. It is useful for borders and small visual details.</li>
                     <li><code>%</code> -- A percentage usually calculated from a related size of the parent element.</li>
                     <li><code>rem</code> -- Relative to the root <code>&lt;html&gt;</code> font size. By default, <code>1rem</code> is usually <code>16px</code>.</li>
@@ -429,7 +429,7 @@ img {
                 <p>A practical starting point is to use <code>rem</code> for typography and most spacing, percentages for flexible widths, <code>px</code> for fine details, and <code>em</code> for dimensions tied to a component's font size.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>9. Colors</h3>
                 <p><code>color</code> changes the foreground text color, while <code>background-color</code> changes the background.</p>
                 <pre><code>.example {
@@ -452,7 +452,7 @@ body {
                 <p>Always maintain strong contrast between text and its background so that the content remains readable.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>10. Fonts and Text</h3>
                 <pre><code>body {
     font-family: Georgia, "Times New Roman", serif;
@@ -465,7 +465,7 @@ h1 {
     font-weight: 700;
     text-align: center;
 }</code></pre>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>font-family</code> -- Sets the typeface. Provide fallback fonts and finish with a generic family such as <code>serif</code> or <code>sans-serif</code>.</li>
                     <li><code>font-size</code> -- Sets the text size.</li>
                     <li><code>font-weight</code> -- Sets thickness, commonly <code>400</code> for regular and <code>700</code> for bold.</li>
@@ -476,7 +476,7 @@ h1 {
                 </ul>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>11. Block, Inline, and Display</h3>
                 <p>Block elements such as <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;p&gt;</code> normally begin on a new line and use the available width. Inline elements such as <code>&lt;span&gt;</code> and <code>&lt;a&gt;</code> flow within a line and use only the space their content needs.</p>
                 <pre><code>a {
@@ -486,7 +486,7 @@ h1 {
 .hidden {
     display: none;
 }</code></pre>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>display: block</code> -- Creates a block-level box.</li>
                     <li><code>display: inline</code> -- Creates an inline box; width and height do not behave like they do on a block.</li>
                     <li><code>display: inline-block</code> -- Flows inline but accepts dimensions and padding like a block.</li>
@@ -495,7 +495,7 @@ h1 {
                 </ul>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>12. Flexbox Basics</h3>
                 <p>Flexbox arranges a group of items along one main direction. The parent is the flex container, and its direct children are flex items.</p>
                 <pre><code>&lt;div class="cards"&gt;
@@ -510,7 +510,7 @@ h1 {
 }</code></pre>
 
                 <h4>Direction and axes</h4>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li><code>row</code> -- Items run horizontally. This is the default.</li>
                     <li><code>row-reverse</code> -- Items run horizontally in reverse order.</li>
                     <li><code>column</code> -- Items run vertically.</li>
@@ -542,7 +542,7 @@ h1 {
                 <p>This is shorthand for <code>flex-grow: 1</code>, <code>flex-shrink: 1</code>, and <code>flex-basis: 250px</code>. The card starts around <code>250px</code> wide, may grow into free space, and may shrink when necessary.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>13. Styling Forms and Interactive Elements</h3>
                 <pre><code>input,
 textarea,
@@ -577,7 +577,7 @@ button:hover {
                 <p><code>font: inherit</code> gives controls the surrounding font. A visible focus state supports keyboard navigation, and <code>cursor: pointer</code> communicates that a button is clickable.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>14. Responsive Images</h3>
                 <pre><code>img {
     display: block;
@@ -587,7 +587,7 @@ button:hover {
                 <p>This prevents an image from becoming wider than its container while preserving its original proportions.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>15. A Useful CSS Foundation</h3>
                 <pre><code>* {
     box-sizing: border-box;
@@ -642,10 +642,10 @@ a:focus-visible {
                 <p>This is a starting point rather than a rule for every project. Change it to suit the content and visual design of the page.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>16. Browser Developer Tools</h3>
                 <p>Press <code>F12</code> or open the browser's developer tools and select the Elements or Inspector tab. Developer tools allow you to:</p>
-                <ul style="display: grid; gap: 5px;">
+                <ul>
                     <li>Inspect which CSS rules apply to an element.</li>
                     <li>See overridden declarations shown with a line through them.</li>
                     <li>Edit values temporarily and observe the result immediately.</li>
@@ -656,7 +656,7 @@ a:focus-visible {
                 <p>Changes made in developer tools disappear when the page is refreshed, so transfer successful experiments into the stylesheet.</p>
             </article>
 
-            <article style="margin-bottom: 24px;">
+            <article>
                 <h3>Summary</h3>
                 <p>After this week, you should understand how to attach CSS, write rules with selectors, resolve competing styles, use the box model, choose suitable units, style colors and typography, and build a wrapping layout with Flexbox. You should also be able to explain the difference between margin and padding, classes and IDs, <code>rem</code> and <code>em</code>, and <code>justify-content</code> and <code>align-items</code>.</p>
             </article>
@@ -681,7 +681,7 @@ a:focus-visible {
   });
 </script>
 
-<footer style="background-color: #65686d; padding: 15px; text-align: center;">
+<footer>
     <p>&copy; 2026 Frontend Developer Guide. All rights reserved.</p>
 </footer>
 </body>
