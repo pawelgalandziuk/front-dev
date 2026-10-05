@@ -11,6 +11,7 @@ body {
 header {
     background-color: #65686d;
     padding: 15px;
+    border-bottom: 4px solid #000;
 }
 
 .page-layout {
@@ -22,6 +23,7 @@ nav {
     width: 200px;
     background-color: #5d9ee9;
     padding: 20px;
+    border-right: 4px solid #000;
 }
 
 nav ul {
@@ -64,6 +66,7 @@ footer {
     background-color: #65686d;
     padding: 15px;
     text-align: center;
+    border-top: 4px solid #000;
 }
 
 .box-model {
