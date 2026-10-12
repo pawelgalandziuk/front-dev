@@ -28,6 +28,12 @@ nav {
     ul {
         display: grid;
         gap: 10px;
+
+        a {
+            &:hover {
+                color: #fff;
+            }
+        }
     }
 }
 
@@ -59,7 +65,7 @@ article {
         display: grid;
         gap: 5px;
     }
-    
+
     table {
         width: 100%;
         border-collapse: collapse;
