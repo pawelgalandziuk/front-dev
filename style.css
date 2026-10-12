@@ -24,37 +24,16 @@ nav {
     background-color: #5d9ee9;
     padding: 20px;
     border-right: 4px solid #000;
-}
 
-nav ul {
-    display: grid;
-    gap: 10px;
+    ul {
+        display: grid;
+        gap: 10px;
+    }
 }
 
 main {
     flex: 1;
     padding: 20px;
-}
-
-article {
-    margin-bottom: 24px;
-}
-
-article ul,
-article ol {
-    display: grid;
-    gap: 5px;
-}
-
-article table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-article th,
-article tfoot td {
-    text-align: left;
 }
 
 img {
@@ -72,4 +51,23 @@ footer {
 .box-model {
     width: 400px;
     height: auto;
+}
+
+article {
+    ul,
+    ol {
+        display: grid;
+        gap: 5px;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    tfoot td {
+        text-align: left;
+    }
 }

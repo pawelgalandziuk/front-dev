@@ -646,7 +646,31 @@ a:focus-visible {
             </article>
 
             <article>
-                <h3>16. Browser Developer Tools</h3>
+                <h3>16. CSS Nesting</h3>
+                <p>CSS nesting lets you write rules for elements inside a parent selector without repeating the parent selector. For example, these nested rules:</p>
+                <pre><code>article {
+    ul,
+    ol {
+        display: grid;
+        gap: 5px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    tfoot td {
+        text-align: left;
+    }
+}</code></pre>
+                <p>are equivalent to selectors such as <code>article ul</code>, <code>article ol</code>, <code>article table</code>, <code>article th</code>, and <code>article tfoot td</code>. Use <code>&amp;</code> when you want to attach a pseudo-class or another selector directly to the parent, as in <code>&amp;:hover</code>, which selects the hovered article itself.</p>
+                <p>Nesting helps keep related styles together, but it is optional. Modern browsers support native CSS nesting; check browser requirements if your page needs to work in older browsers.</p>
+            </article>
+
+            <article>
+                <h3>17. Browser Developer Tools</h3>
                 <p>Press <code>F12</code> or open the browser's developer tools and select the Elements or Inspector tab. Developer tools allow you to:</p>
                 <ul>
                     <li>Inspect which CSS rules apply to an element.</li>
