@@ -13,9 +13,27 @@ body {
 }
 
 header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 200px;
     background-color: var(--gray-test-color);
     padding: 15px;
     border-bottom: 4px solid #000;
+}
+
+header h1 {
+    margin: 0;
+    text-align: left;
+    font-size: 90px;
+}
+
+.site-logo {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 .page-layout {

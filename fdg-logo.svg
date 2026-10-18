@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">FDG logo</title>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#173b68"/>
+      <stop offset="1" stop-color="#10243e"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#background)"/>
+  <path d="M24 39h80M24 89h80" fill="none" stroke="#58dbc9" stroke-linecap="round" stroke-width="5"/>
+  <text x="64" y="78" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="800" letter-spacing="-2" text-anchor="middle">FDG</text>
+</svg>
