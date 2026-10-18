@@ -24,7 +24,7 @@ header {
 }
 
 nav {
-    width: 200px;
+    width: 280px;
     background-color: #5d9ee9;
     padding: 20px;
     border-right: 4px solid #000;
@@ -43,7 +43,12 @@ nav {
 
 main {
     flex: 1;
+    min-width: 0;
     padding: 20px;
+}
+
+pre {
+    overflow-x: auto;
 }
 
 img {
@@ -79,5 +84,77 @@ article {
     th,
     tfoot td {
         text-align: left;
+    }
+}
+
+#third-week {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+
+    article {
+        margin-block: 2rem;
+    }
+
+    pre {
+        padding: 1rem;
+        background-color: #fff;
+        overflow-wrap: normal;
+    }
+
+    table {
+        min-width: 32rem;
+    }
+
+    th,
+    td {
+        padding: 0.5rem;
+        border: 1px solid var(--gray-test-color);
+        vertical-align: top;
+    }
+}
+
+.week-three-table {
+    overflow-x: auto;
+}
+
+.week-three-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 32rem;
+
+    > div {
+        padding: 1rem;
+        background-color: #fff;
+        border: 1px solid var(--gray-test-color);
+    }
+}
+
+.week-three-card {
+    position: relative;
+    max-width: 24rem;
+    padding: 3rem 1rem 1rem;
+    background-color: #fff;
+    border: 1px solid var(--gray-test-color);
+}
+
+.week-three-card__badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #145db1;
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    .page-layout {
+        flex-direction: column;
+    }
+
+    nav {
+        width: 100%;
+        border-right: 0;
+        border-bottom: 4px solid #000;
     }
 }

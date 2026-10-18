@@ -20,6 +20,7 @@
             <li><a href="#introduction">Introduction</a></li>
             <li><a href="#first-week">Week 1 - HTML Structure</a></li>
             <li><a href="#second-week">Week 2 - CSS Styling</a></li>
+            <li><a href="#third-week">Week 3 - Layout and Responsiveness</a></li>
         </ul>
     </nav>
 
@@ -686,6 +687,403 @@ a:focus-visible {
             <article>
                 <h3>Summary</h3>
                 <p>After this week, you should understand how to attach CSS, write rules with selectors, resolve competing styles, use the box model, choose suitable units, style colors and typography, and build a wrapping layout with Flexbox. You should also be able to explain the difference between margin and padding, classes and IDs, <code>rem</code> and <code>em</code>, and <code>justify-content</code> and <code>align-items</code>.</p>
+            </article>
+        </section>
+
+        <section id="third-week">
+            <h2>Week 3 - CSS Layout and Responsiveness</h2>
+            <p><strong>Goal:</strong> arrange elements on a page and make the layout work on phones, tablets, and computers.</p>
+            <p><strong>The main rule:</strong> build your main layout with normal flow, Flexbox, or Grid. Use <code>position</code> for specific tasks, such as a badge on a card or a sticky menu.</p>
+            <p>The examples are independent. Classes such as <code>.container</code> and <code>.card</code> are names chosen by the author, not special CSS commands. Give the HTML element the matching class to apply a rule.</p>
+
+            <article>
+                <h3>1. Start Here: Normal Flow</h3>
+                <p>The browser already knows how to arrange elements without extra positioning. This is called <strong>normal flow</strong>:</p>
+                <ul>
+                    <li>Block elements, such as <code>&lt;div&gt;</code> and <code>&lt;p&gt;</code>, start on a new line by default.</li>
+                    <li>Inline elements, such as <code>&lt;span&gt;</code> and <code>&lt;a&gt;</code>, sit alongside text while there is enough space.</li>
+                    <li>HTML order affects the order on the page. A longer paragraph normally pushes the following elements down.</li>
+                </ul>
+                <h4>Which tool should you choose?</h4>
+                <ul>
+                    <li><strong>Text, headings, and sections below each other:</strong> normal flow.</li>
+                    <li><strong>A row of buttons, a menu, or an icon next to text:</strong> Flexbox. You mainly control one direction: a row or a column.</li>
+                    <li><strong>A card grid or content with a sidebar:</strong> Grid. You control columns and rows together.</li>
+                    <li><strong>A badge in a card corner:</strong> <code>position: absolute</code> inside a parent with <code>position: relative</code>.</li>
+                    <li><strong>An element that stays in a screen corner:</strong> <code>position: fixed</code>.</li>
+                    <li><strong>A menu that sticks while scrolling:</strong> <code>position: sticky</code>.</li>
+                </ul>
+                <p>You can combine these tools: Grid for the page, Flexbox for buttons inside a card, and <code>absolute</code> for its badge.</p>
+            </article>
+
+            <article>
+                <h3>2. Spacing and Centering Without Guesswork</h3>
+                <ul>
+                    <li><code>margin</code> -- space outside an element.</li>
+                    <li><code>padding</code> -- space inside an element, between its content and border.</li>
+                    <li><code>gap</code> -- space between items in a Flexbox or Grid container. Set it on the parent.</li>
+                </ul>
+                <h4>A container centered on the page</h4>
+                <pre><code>.container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}</code></pre>
+                <p>The container uses the available width but never becomes wider than <code>70rem</code>. <code>margin-inline: auto</code> shares the free space between both sides, and <code>padding-inline</code> adds space at the edges. <code>margin: auto</code> alone does not mean vertical centering.</p>
+                <h4>Centering horizontally and vertically</h4>
+                <pre><code>.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 12rem;
+    gap: 1rem;
+}</code></pre>
+                <p>With the default <code>flex-direction: row</code>, <code>justify-content</code> aligns horizontally and <code>align-items</code> aligns vertically. With <code>column</code>, the axes switch. The parent needs free space in a direction for centering to be visible.</p>
+                <p><strong>Avoid this:</strong> do not set <code>left: 300px</code> just to make something look centered. It will no longer be centered when the screen width changes.</p>
+            </article>
+
+            <article>
+                <h3>3. CSS Grid: Columns, Rows, and Grid-template</h3>
+                <p>Imagine a sheet of graph paper. The parent defines the grid, and its <strong>direct children</strong> occupy the cells.</p>
+                <pre><code>&lt;div class="grid"&gt;
+    &lt;div&gt;Card 1&lt;/div&gt;
+    &lt;div&gt;Card 2&lt;/div&gt;
+    &lt;div&gt;Card 3&lt;/div&gt;
+    &lt;div&gt;Card 4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+}</code></pre>
+                <ul>
+                    <li><code>display: grid</code> turns the parent into a grid container.</li>
+                    <li><code>grid-template-columns: 1fr 1fr</code> creates two columns that share the available space equally, as long as their content's minimum sizes allow it.</li>
+                    <li><code>fr</code> means a share of available space after accounting for gaps and other track sizes. <code>1fr 2fr</code> shares that space in a 1-to-2 ratio.</li>
+                    <li><code>grid-template-rows: auto auto</code> defines two rows whose heights adapt to their content.</li>
+                    <li><code>gap: 1rem</code> adds space between columns and rows, but not around the outer edge of the grid.</li>
+                </ul>
+                <p><strong>Result:</strong> the first two cards are in the first row, and the next two are in the second row.</p>
+                <div class="week-three-grid">
+                    <div>Card 1</div>
+                    <div>Card 2</div>
+                    <div>Card 3</div>
+                    <div>Card 4</div>
+                </div>
+                <h4>Useful patterns</h4>
+                <ul>
+                    <li><code>repeat(3, 1fr)</code> -- three columns; a shorter way to write <code>1fr 1fr 1fr</code>.</li>
+                    <li><code>14rem 1fr</code> -- a <code>14rem</code> sidebar next to flexible content.</li>
+                    <li><code>repeat(3, minmax(0, 1fr))</code> -- three equal, flexible columns that can shrink below their content's minimum width. Long content may still need wrapping or scrolling.</li>
+                </ul>
+                <p><code>grid-template</code> is a shorthand. This example defines two rows before the slash and two columns after it:</p>
+                <pre><code>.grid {
+    grid-template: auto auto / 1fr 1fr;
+}</code></pre>
+                <p>As a beginner, you can use <code>grid-template-columns</code> and <code>grid-template-rows</code> separately -- they are easier to read. If you do not define rows, or more cards need extra rows, Grid creates additional rows automatically by default.</p>
+            </article>
+
+            <article>
+                <h3>4. Grid: Placing and Aligning Items</h3>
+                <p>Set <code>grid-column</code> and <code>grid-row</code> on the <strong>child</strong>, not on the container.</p>
+                <pre><code>.wide-card {
+    grid-column: 1 / -1;
+}
+
+.featured-card {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+}</code></pre>
+                <ul>
+                    <li><code>grid-column: 1 / -1</code> -- from the first to the last line of the explicitly defined grid, spanning all its columns.</li>
+                    <li><code>grid-column: 1 / 3</code> -- from line 1 to line 3, spanning two columns. Three columns have four boundary lines.</li>
+                    <li><code>grid-row: 1 / 3</code> -- the same idea for rows: span two rows.</li>
+                </ul>
+                <p>Add <code>class="wide-card"</code> to one of the cards in the previous example to see the change.</p>
+                <h4>Alignment inside cells</h4>
+                <pre><code>.grid {
+    justify-items: center;
+    align-items: center;
+}
+
+.special-card {
+    justify-self: end;
+    align-self: start;
+}</code></pre>
+                <p>In a typical layout with horizontal text, <code>justify-items</code> aligns children horizontally and <code>align-items</code> aligns them vertically inside their cells. <code>place-items: center</code> is a shorthand for centering in both directions.</p>
+                <p><code>justify-self</code> and <code>align-self</code> change the alignment of just one child. By default, items without fixed dimensions usually stretch to fill their cells (<code>stretch</code>).</p>
+                <p><strong>Note:</strong> <code>text-align: center</code> aligns text and inline content inside an element, not the card itself within the grid. Keep the visual order consistent with the logical HTML order.</p>
+            </article>
+
+            <article>
+                <h3>5. Responsiveness, Media Queries, and Mobile-first</h3>
+                <p>A <strong>responsive page</strong> adapts its layout to the available space. Instead of shrinking a desktop page, you might change three columns into one.</p>
+                <p><strong>Mobile-first</strong> means writing a simple layout for small screens first, then adding changes for wider screens with <code>min-width</code>.</p>
+                <pre><code>.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}</code></pre>
+                <ul>
+                    <li><strong>Below 768px:</strong> one column from the base rule.</li>
+                    <li><strong>From 768px to below 1024px:</strong> two columns.</li>
+                    <li><strong>From 1024px:</strong> three columns. Both conditions match, but the later rule with the same specificity overrides the earlier one.</li>
+                </ul>
+                <p><code>@media</code> is a condition: the rules inside apply only when it matches. <code>min-width</code> means "at this width or wider," and <code>max-width</code> means "at this width or narrower." The browser checks the viewport width in CSS pixels, not the phone model.</p>
+                <p>A <strong>breakpoint</strong> is a threshold where the layout changes. The values 768px and 1024px are examples, not mandatory standards. Choose breakpoints where your content becomes too cramped or too spread out.</p>
+                <h4>What else should you remember?</h4>
+                <ul>
+                    <li>Add the viewport tag below inside <code>&lt;head&gt;</code>. This guide already includes it.</li>
+                    <li>You do not need to repeat every style inside <code>@media</code> -- write only the changes.</li>
+                    <li>Avoid a fixed width such as <code>width: 1200px</code> for the whole page. Use flexible widths and <code>max-width</code>.</li>
+                    <li>For images, <code>max-width: 100%; height: auto;</code> is useful. Avoid a fixed height on sections with long text.</li>
+                </ul>
+                <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>6. CSS Variables: Named Values</h3>
+                <p>A CSS variable, also called a <strong>custom property</strong>, lets you name a value and reuse it in many places. Its name starts with <code>--</code>, and you read its value with <code>var()</code>.</p>
+                <pre><code>:root {
+    --color-primary: #145db1;
+    --space: 1rem;
+    --radius: 0.5rem;
+}
+
+.button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--space);
+    border-radius: var(--radius);
+}
+
+.button--danger {
+    --color-primary: #b42318;
+}</code></pre>
+                <ul>
+                    <li><code>:root</code> selects the document's root element, which is <code>&lt;html&gt;</code> in HTML. It is a useful place for shared colors, spacing, and sizes.</li>
+                    <li>Changing <code>--color-primary</code> in <code>:root</code> updates every use of that variable unless it has a local override.</li>
+                    <li>Variables are inherited by default. An override on an element affects it and its descendants, not the whole page.</li>
+                </ul>
+                <pre><code>&lt;button class="button"&gt;Save&lt;/button&gt;
+&lt;button class="button button--danger"&gt;Delete&lt;/button&gt;</code></pre>
+                <p>The first button will be blue and the second red. Both use the same <code>.button</code> rule.</p>
+                <p>You can provide a fallback value, used, for example, when the variable has not been defined:</p>
+                <pre><code>.panel {
+    background-color: var(--color-surface, white);
+}</code></pre>
+                <p>This project already uses <code>--gray-test-color</code> in the same way. A CSS variable stores a style value; it is not a JavaScript condition or function.</p>
+            </article>
+
+            <article>
+                <h3>7. Position: Static, Relative, Absolute, Fixed, and Sticky</h3>
+                <p><code>position</code> controls how an element is positioned. Depending on the mode, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code> set offsets from reference edges or from the original position. They have no effect with <code>static</code>.</p>
+                <div class="week-three-table" role="region" aria-label="Comparison of position values" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Value</th>
+                                <th scope="col">Keeps its space in the layout?</th>
+                                <th scope="col">Reference point</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><code>static</code></th>
+                                <td>Yes</td>
+                                <td>Normal flow; top/left do not move it.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>relative</code></th>
+                                <td>Yes</td>
+                                <td>Its own original position.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>absolute</code></th>
+                                <td>No</td>
+                                <td>The nearest ancestor that creates a containing block, usually with a position other than static.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>fixed</code></th>
+                                <td>No</td>
+                                <td>Usually the browser viewport.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><code>sticky</code></th>
+                                <td>Yes</td>
+                                <td>The nearest ancestor with a scrolling mechanism; its containing block limits movement.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Static: the default</h4>
+                <p><code>position: static</code> means normal positioning. You usually do not need to write it.</p>
+
+                <h4>Relative: move visually, but keep the space</h4>
+                <pre><code>.box {
+    position: relative;
+    top: 8px;
+    left: 12px;
+}</code></pre>
+                <p>The element moves 8px down and 12px right <strong>from its original position</strong>. Other elements behave as if it were still in its old place, so it may overlap them.</p>
+                <p>A common use of <code>relative</code> is not moving an element, but creating a reference point for a child with <code>absolute</code>. In that case, you do not need <code>top</code> or <code>left</code>.</p>
+
+                <h4>Absolute: a badge in a card corner</h4>
+                <pre><code>&lt;div class="card"&gt;
+    &lt;span class="card__badge"&gt;New&lt;/span&gt;
+    &lt;h4&gt;Product card&lt;/h4&gt;
+    &lt;p&gt;Product description.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.card {
+    position: relative;
+    padding: 3rem 1rem 1rem;
+    border: 1px solid #65686d;
+}
+
+.card__badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+}</code></pre>
+                <p><strong>The parent has <code>relative</code>; the child has <code>absolute</code>.</strong> The badge sits in the card's top-right corner. Extra top <code>padding</code> reserves space for it because the badge itself takes no space in normal flow.</p>
+                <div class="week-three-card">
+                    <span class="week-three-card__badge">New</span>
+                    <p><strong>Product card</strong></p>
+                    <p>The badge is attached to this card, not to the whole screen.</p>
+                </div>
+                <p>If the parent does not create a reference point, the browser searches further up the ancestor chain. If none is found, the initial containing block becomes the reference, not this card. This is why a badge can appear somewhere else on the page.</p>
+
+                <h4>Fixed: a constant position in the viewport</h4>
+                <pre><code>.help-button {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 20;
+}</code></pre>
+                <p>The help button stays in the bottom-right corner while you scroll. It does not reserve space in the layout, so make sure it does not cover text or other buttons, including when the page is zoomed in.</p>
+                <p><strong>An exception to remember:</strong> an ancestor with, for example, <code>transform</code> can become the reference for <code>fixed</code>. If an element does not stay attached to the viewport, check its ancestors' styles.</p>
+
+                <h4>Sticky: stick when scrolling reaches a threshold</h4>
+                <pre><code>.sticky-menu {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+}</code></pre>
+                <p>The menu starts in its normal position. When scrolling brings it to the <code>top: 1rem</code> threshold, it stays near that edge as long as its container's boundaries allow it. This is not the same as <code>fixed</code>.</p>
+                <ul>
+                    <li>Set a threshold, such as <code>top: 0</code> or <code>top: 1rem</code>. Without one, the element will not stick along that axis.</li>
+                    <li>The container must be tall enough to allow movement. Adding <code>sticky</code> to an element as tall as its parent is not enough.</li>
+                    <li>Check ancestors' <code>overflow</code>. Values such as <code>auto</code>, <code>scroll</code>, or <code>hidden</code> can change which ancestor controls the sticking behavior.</li>
+                    <li>In Grid or Flexbox, stretching an item can leave no room for movement. In a suitable layout, <code>align-self: start</code> helps, as in the example below.</li>
+                </ul>
+                <p>Also, <code>inset</code> is a shorthand for <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>. For example, <code>inset: 0</code> sets all four offsets to zero.</p>
+            </article>
+
+            <article>
+                <h3>8. Z-index: Which Element Is on Top?</h3>
+                <p><code>z-index</code> controls the order of overlapping layers. A larger number means a higher layer <strong>within the same stacking context</strong>. The number has no <code>px</code> unit.</p>
+                <pre><code>.lower-layer {
+    position: relative;
+    z-index: 1;
+}
+
+.upper-layer {
+    position: relative;
+    z-index: 2;
+}</code></pre>
+                <ul>
+                    <li>You usually apply <code>z-index</code> to an element with a <code>position</code> other than <code>static</code>.</li>
+                    <li>Exception: Flexbox or Grid items can use <code>z-index</code> without changing <code>position</code>.</li>
+                    <li><code>z-index</code> does not move elements or create spacing. It controls what appears in front when elements overlap.</li>
+                </ul>
+                <h4>Why does z-index: 9999 sometimes not help?</h4>
+                <p>A <strong>stacking context</strong> is a separate group of layers. It can be created by, for example, <code>position: relative</code> together with <code>z-index: 1</code>, a <code>transform</code>, or <code>opacity</code> below 1.</p>
+                <p>Imagine two boxes: box A is below box B. Even a very large <code>z-index</code> on a child inside box A cannot lift it above the whole of box B. Check the parents' layers first instead of increasing the number blindly.</p>
+                <p>If an element is clipped by a parent's <code>overflow: hidden</code>, increasing <code>z-index</code> will not remove that clipping either.</p>
+            </article>
+
+            <article>
+                <h3>9. Recipe: A Responsive Layout with Named Areas</h3>
+                <p><code>grid-template-areas</code> lets you draw a layout using names. <code>grid-area</code> assigns a child to an area. Place this HTML inside <code>&lt;body&gt;</code> on a separate practice page:</p>
+                <pre><code>&lt;div class="site"&gt;
+    &lt;header class="site__header"&gt;Header&lt;/header&gt;
+    &lt;aside class="site__menu"&gt;Sidebar menu&lt;/aside&gt;
+    &lt;main class="site__content"&gt;
+        &lt;h1&gt;Page content&lt;/h1&gt;
+        &lt;p&gt;Add cards and longer text here.&lt;/p&gt;
+    &lt;/main&gt;
+    &lt;footer class="site__footer"&gt;Footer&lt;/footer&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.site {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "menu"
+        "content"
+        "footer";
+    gap: 1rem;
+    max-width: 70rem;
+    margin-inline: auto;
+    padding: 1rem;
+}
+
+.site__header {
+    grid-area: header;
+}
+
+.site__menu {
+    grid-area: menu;
+}
+
+.site__content {
+    grid-area: content;
+    min-width: 0;
+}
+
+.site__footer {
+    grid-area: footer;
+}
+
+@media (min-width: 768px) {
+    .site {
+        grid-template-columns: 14rem minmax(0, 1fr);
+        grid-template-areas:
+            "header header"
+            "menu content"
+            "footer footer";
+    }
+
+    .site__menu {
+        position: sticky;
+        top: 1rem;
+        align-self: start;
+    }
+}</code></pre>
+                <ul>
+                    <li><strong>Small screen:</strong> everything is in one column: header, menu, content, then footer.</li>
+                    <li><strong>From 768px:</strong> the menu is <code>14rem</code> wide, and the content takes the remaining space. The header and footer span both columns.</li>
+                    <li>A repeated name, such as <code>"header header"</code>, means one area spanning two cells. Each named area must form a rectangle.</li>
+                    <li><code>min-width: 0</code> lets the content item shrink. Long code should still have its own scrolling with <code>overflow-x: auto</code>.</li>
+                    <li>Add plenty of content to <code>.site__content</code> to see the menu's <code>sticky</code> behavior. The menu should not be taller than the available viewport height.</li>
+                </ul>
+                <p><strong>Remember:</strong> Flexbox = one main direction; Grid = columns and rows; media query = a condition for applying styles; CSS variable = a named value; relative = a reference point with its space preserved; absolute = positioning within a containing block without reserving space; fixed = usually relative to the viewport; sticky = sticking within container boundaries; z-index = layer order.</p>
             </article>
         </section>
     </main>
