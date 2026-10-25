@@ -49,19 +49,31 @@ header h1 {
 }
 
 nav {
-    flex: 0 0 270px;
-    width: 270px;
+    flex: 0 0 300px;
+    width: 300px;
     background-color: #5d9ee9;
-    padding: 10px;
-    border-right: 4px solid #000;
+    border-right: 5px solid #000;
+    border-left: 2px solid #000;
+    font-family: system-ui, sans-serif;
 
     ul {
         display: grid;
-        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
 
         a {
+            display: block;
+            padding: 12px;
+            border-bottom: 2px solid #000;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            background-color: #5889c2;
             &:hover {
                 color: #fff;
+                background-color: #000;
             }
         }
     }

@@ -22,6 +22,7 @@
             <li><a href="#first-week">Week 1 - HTML Structure</a></li>
             <li><a href="#second-week">Week 2 - CSS Styling</a></li>
             <li><a href="#third-week">Week 3 - Layout and Responsiveness</a></li>
+            <li><a href="#fourth-week">Week 4 - Colors, Fonts, and Units</a></li>
         </ul>
     </nav>
 
@@ -1085,6 +1086,112 @@ a:focus-visible {
                     <li>Add plenty of content to <code>.site__content</code> to see the menu's <code>sticky</code> behavior. The menu should not be taller than the available viewport height.</li>
                 </ul>
                 <p><strong>Remember:</strong> Flexbox = one main direction; Grid = columns and rows; media query = a condition for applying styles; CSS variable = a named value; relative = a reference point with its space preserved; absolute = positioning within a containing block without reserving space; fixed = usually relative to the viewport; sticky = sticking within container boundaries; z-index = layer order.</p>
+            </article>
+        </section>
+
+        <section id="fourth-week">
+            <h2>Week 4 - Colors, Fonts, and Units</h2>
+            <p><strong>Goal:</strong> create a consistent visual style with readable text, accessible colors, and flexible measurements.</p>
+            <p>Week 2 introduced the basic CSS properties. This week focuses on choosing values that work together and remain readable on different screens.</p>
+
+            <article>
+                <h3>1. Build a Consistent Color Palette</h3>
+                <p>CSS supports named colors, hexadecimal values, and functional formats such as <code>rgb()</code> and <code>hsl()</code>. Use a small palette with clear roles rather than choosing a new color for every element.</p>
+                <pre><code>:root {
+    --color-text: #20242a;
+    --color-background: #f7f8fa;
+    --color-primary: hsl(220, 70%, 40%);
+    --color-accent: #e6a23c;
+}
+
+body {
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+a {
+    color: var(--color-primary);
+}</code></pre>
+                <ul>
+                    <li><code>#rrggbb</code> -- Hexadecimal red, green, and blue channels; shorthand such as <code>#369</code> is also supported.</li>
+                    <li><code>rgb(20 80 160)</code> -- Sets red, green, and blue channel values.</li>
+                    <li><code>hsl(220 70% 40%)</code> -- Sets hue, saturation, and lightness, which can make related shades easier to create.</li>
+                    <li><code>rgb(20 80 160 / 50%)</code> -- Adds transparency. Transparent text can become difficult to read over changing backgrounds.</li>
+                </ul>
+                <p>Check text and background contrast, including link, hover, and focus states. Do not use color alone to communicate meaning; pair it with text, an icon, or another visual cue.</p>
+            </article>
+
+            <article>
+                <h3>2. Make Typography Readable</h3>
+                <p>Choose a font stack with fallbacks so text remains available if the preferred font is not installed. Use a comfortable line height and a limited set of sizes to create a clear heading hierarchy.</p>
+                <pre><code>body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+.muted {
+    color: #555b64;
+}
+
+.label {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}</code></pre>
+                <ul>
+                    <li><code>font-family</code> -- Lists preferred fonts followed by fallbacks and a generic family.</li>
+                    <li><code>font-size</code> -- Sets the size of text; relative sizes respect user preferences better than fixed pixel sizes.</li>
+                    <li><code>font-weight</code> -- Sets emphasis, commonly from <code>400</code> (regular) to <code>700</code> (bold).</li>
+                    <li><code>line-height</code> -- Controls space between lines. A unitless value such as <code>1.6</code> scales with the font size.</li>
+                    <li><code>letter-spacing</code> -- Adjusts space between characters; use it sparingly, especially for body text.</li>
+                </ul>
+                <p>Keep paragraphs to a comfortable line length and make sure small or muted text still has enough contrast. Avoid using font size or color as the only way to identify an important action.</p>
+            </article>
+
+            <article>
+                <h3>3. Choose the Right CSS Unit</h3>
+                <p>Different units respond to different things. Pick one based on what should control the size:</p>
+                <ul>
+                    <li><code>px</code> -- A CSS pixel, useful for small details such as a thin border or focus outline.</li>
+                    <li><code>rem</code> -- Relative to the root font size; useful for consistent text sizes and spacing across the page.</li>
+                    <li><code>em</code> -- Relative to the element's font size; useful when a component's padding should scale with its text.</li>
+                    <li><code>%</code> -- Relative to a related value, often the parent's size; useful for flexible widths.</li>
+                    <li><code>vw</code> and <code>vh</code> -- Relative to the viewport width and height; useful for some screen-based sizing, but avoid making text depend only on them.</li>
+                    <li><code>ch</code> -- Based on the width of the “0” character; useful for limiting text line length.</li>
+                    <li>Unitless numbers -- Used by properties such as <code>line-height</code> and <code>opacity</code>; do not add <code>px</code> to them.</li>
+                </ul>
+                <pre><code>.article {
+    width: min(100% - 2rem, 65ch);
+    margin-inline: auto;
+    padding: 1.5rem;
+}
+
+.button {
+    padding: 0.6em 1em;
+    border: 2px solid currentColor;
+}
+
+.title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}</code></pre>
+                <p><code>min()</code> keeps the article within the available width while limiting long lines. <code>em</code> makes button padding follow its text size. <code>clamp()</code> lets the title grow with the viewport while enforcing a minimum and maximum size.</p>
+                <p>Do not set a fixed height on text containers just to fit one screen size. Content can wrap differently when the viewport changes or the user zooms in.</p>
+            </article>
+
+            <article>
+                <h3>Summary</h3>
+                <p>Use a small, reusable color palette and check contrast. Choose font fallbacks, establish a text hierarchy, and give body text comfortable line spacing. Use relative units for most typography and spacing, reserving pixels for fine details. Test the result at different viewport sizes and zoom levels.</p>
             </article>
         </section>
     </main>
