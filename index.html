@@ -23,6 +23,7 @@
             <li><a href="#second-week">Week 2 - CSS Styling</a></li>
             <li><a href="#third-week">Week 3 - Layout and Responsiveness</a></li>
             <li><a href="#fourth-week">Week 4 - Colors, Fonts, and Units</a></li>
+            <li><a href="#fifth-week">Week 5 - Flexbox and CSS Grid</a></li>
         </ul>
     </nav>
 
@@ -1192,6 +1193,672 @@ h1 {
             <article>
                 <h3>Summary</h3>
                 <p>Use a small, reusable color palette and check contrast. Choose font fallbacks, establish a text hierarchy, and give body text comfortable line spacing. Use relative units for most typography and spacing, reserving pixels for fine details. Test the result at different viewport sizes and zoom levels.</p>
+            </article>
+        </section>
+
+        <section id="fifth-week">
+            <h2>Week 5 - Flexbox and CSS Grid</h2>
+            <p><strong>Goal:</strong> confidently build flexible rows, columns, card galleries, and complete page layouts. Learn which properties belong on the parent, which belong on its children, and how to debug layouts that do not behave as expected.</p>
+            <p>Weeks 2 and 3 introduced these layout tools. This week explains them in detail. The official name of the two-dimensional layout system is <strong>CSS Grid</strong>, not Gridbox.</p>
+            <p><strong>How to use the examples:</strong> code snippets are independent examples. Use the matching HTML and CSS together in a separate page with its own stylesheet. Classes such as <code>.cards</code> are ordinary names, not built-in CSS commands. The visible demos below use separate classes so they do not change the rest of this guide.</p>
+
+            <article>
+                <h3>1. Flexbox or Grid: Which One Should You Use?</h3>
+                <p><strong>Flexbox is one-dimensional:</strong> it lays items out along one main axis, either a row or a column. It can wrap, but each line distributes its space independently. <strong>Grid is two-dimensional:</strong> it defines rows and columns together, so items on different rows can share the same column boundaries.</p>
+                <div class="week-five-table" role="region" aria-label="Flexbox and Grid comparison" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Question</th>
+                                <th scope="col">Flexbox</th>
+                                <th scope="col">CSS Grid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">What do you control?</th>
+                                <td>One main direction; each wrapped line behaves independently.</td>
+                                <td>Rows and columns, including items spanning multiple tracks.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Typical uses</th>
+                                <td>Menus, toolbars, button groups, an icon beside text, or a vertical card.</td>
+                                <td>Galleries, dashboards, a sidebar with content, or a whole page layout.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">What drives the layout?</th>
+                                <td>Often the items' content and how they share available space.</td>
+                                <td>Often the tracks you define and where items sit within them.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Can you combine them?</th>
+                                <td colspan="2">Yes. Use Grid for a card gallery and Flexbox inside each card.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>These are guidelines, not restrictions. Both tools can build many of the same layouts. Choose the one that expresses your intention most clearly, rather than using absolute positioning or lots of manual offsets.</p>
+            </article>
+
+            <article>
+                <h3>2. Containers and Items: The Parent-child Rule</h3>
+                <pre><code>&lt;div class="layout"&gt;
+    &lt;div class="item"&gt;First&lt;/div&gt;
+    &lt;div class="item"&gt;
+        &lt;span&gt;Inside the second item&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="item"&gt;Third&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.layout {
+    display: flex; /* or display: grid */
+    gap: 1rem;
+}</code></pre>
+                <ul>
+                    <li>The element with <code>display: flex</code> or <code>display: grid</code> is the <strong>container</strong>.</li>
+                    <li>Its direct children become <strong>flex items</strong> or <strong>grid items</strong>. The nested <code>&lt;span&gt;</code> is not an item of <code>.layout</code>.</li>
+                    <li>Container properties control the group: direction, tracks, gaps, and shared alignment.</li>
+                    <li>Item properties control one child: flexible sizing, placement, or individual alignment.</li>
+                    <li>An item can also be a container for its own children. This is how nested layouts work.</li>
+                </ul>
+                <p><code>display: inline-flex</code> and <code>display: inline-grid</code> use the same internal layout systems, but the container itself participates in surrounding inline flow instead of behaving as a block-level box.</p>
+            </article>
+
+            <article>
+                <h3>3. Flexbox: Direction and Axes</h3>
+                <pre><code>.layout {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}</code></pre>
+                <ul>
+                    <li><code>row</code> -- Along the inline direction; usually left to right in an English page. This is the default.</li>
+                    <li><code>row-reverse</code> -- The same axis, with the start and end reversed.</li>
+                    <li><code>column</code> -- Along the block direction; usually top to bottom.</li>
+                    <li><code>column-reverse</code> -- The column direction reversed.</li>
+                </ul>
+                <p>The <strong>main axis</strong> follows <code>flex-direction</code>. The <strong>cross axis</strong> runs perpendicular to it. In normal horizontal writing, <code>row</code> has a horizontal main axis and <code>column</code> has a vertical main axis.</p>
+                <p><strong>Remember axes, not just horizontal and vertical:</strong> <code>justify-content</code> works along the main axis; <code>align-items</code> works along the cross axis. Text direction and writing mode can also affect the actual directions.</p>
+                <p><strong>Live example: a row of three items</strong></p>
+                <div class="week-five-demo week-five-flex-row">
+                    <div class="week-five-item">First</div>
+                    <div class="week-five-item">Second</div>
+                    <div class="week-five-item">Third</div>
+                </div>
+            </article>
+
+            <article>
+                <h3>4. Flexbox: Aligning Items and Distributing Space</h3>
+                <pre><code>.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    min-height: 6rem;
+}
+
+.toolbar__special {
+    align-self: flex-end;
+}</code></pre>
+                <h4>justify-content: the main axis</h4>
+                <ul>
+                    <li><code>flex-start</code> -- Pack items at the main start.</li>
+                    <li><code>flex-end</code> -- Pack items at the main end.</li>
+                    <li><code>center</code> -- Pack items in the center.</li>
+                    <li><code>space-between</code> -- Equal free space between items, with no added space at the outer ends.</li>
+                    <li><code>space-around</code> -- Equal space around each item; outer spaces are half the spaces between items.</li>
+                    <li><code>space-evenly</code> -- Equal free space between items and at both outer ends.</li>
+                </ul>
+                <p>Space distribution needs <strong>leftover space</strong>. If growing items already fill the main axis, <code>justify-content</code> has no extra space to distribute. <code>gap</code> still provides spacing between items.</p>
+                <h4>align-items: the cross axis</h4>
+                <ul>
+                    <li><code>stretch</code> -- Items with an automatic cross size stretch across their line. This is the usual default behavior.</li>
+                    <li><code>flex-start</code>, <code>center</code>, and <code>flex-end</code> -- Align at the start, center, or end of the cross axis.</li>
+                    <li><code>baseline</code> -- Align text baselines; useful for labels or controls with different font sizes.</li>
+                    <li><code>align-self</code> -- Set on a child to override the container's <code>align-items</code> for that one item.</li>
+                </ul>
+                <pre><code>.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 12rem;
+}</code></pre>
+                <p>This centers children on both axes. The <code>min-height</code> creates vertical room without forcing a fixed height that could clip longer content.</p>
+                <p><strong>Common trap:</strong> <code>justify-items</code> and <code>justify-self</code> do not align flex items. Use <code>justify-content</code>, flexible sizing, or auto margins instead. In Flexbox, <code>place-items: center</code> does not replace both centering declarations above.</p>
+            </article>
+
+            <article>
+                <h3>5. Flexbox: Wrapping, Gaps, and Multiple Lines</h3>
+                <pre><code>.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    flex: 1 1 14rem;
+    min-width: 0;
+}</code></pre>
+                <ul>
+                    <li><code>flex-wrap: nowrap</code> -- Keep a single line. This is the default; items may shrink or overflow.</li>
+                    <li><code>flex-wrap: wrap</code> -- Allow additional lines when items do not fit.</li>
+                    <li><code>flex-wrap: wrap-reverse</code> -- Allow wrapping with the cross-axis stacking direction reversed.</li>
+                    <li><code>flex-flow: row wrap</code> -- Shorthand for <code>flex-direction</code> and <code>flex-wrap</code>.</li>
+                    <li><code>gap: 1rem</code> -- Set both row and column gaps. <code>gap: 1rem 2rem</code> sets row gap first, column gap second.</li>
+                </ul>
+                <p><code>row-gap</code> and <code>column-gap</code> can be written separately. Gaps separate items or lines; they do not add padding around the container's edges. With <code>column</code>, row gaps separate items down a column and column gaps separate wrapped columns.</p>
+                <h4>align-content is not align-items</h4>
+                <p><code>align-items</code> aligns items <strong>inside each line</strong>. <code>align-content</code> arranges the <strong>lines themselves</strong> along the cross axis when a wrapping flex container has extra cross-axis space.</p>
+                <pre><code>.multi-line {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 20rem;
+    align-items: center;
+    align-content: space-between;
+    gap: 1rem;
+}</code></pre>
+                <p>Useful <code>align-content</code> values include <code>flex-start</code>, <code>flex-end</code>, <code>center</code>, <code>stretch</code>, <code>space-between</code>, <code>space-around</code>, and <code>space-evenly</code>. It does not arrange lines in a <code>nowrap</code> container. Wrapping a column also requires a constrained available height; otherwise the column can simply keep growing.</p>
+                <p><strong>Live example: wrapping cards</strong> -- Resize the window. The last line distributes its space independently, which is a key difference from Grid.</p>
+                <div class="week-five-demo week-five-flex-wrap">
+                    <div class="week-five-item">Card 1</div>
+                    <div class="week-five-item">Card 2</div>
+                    <div class="week-five-item">Card 3</div>
+                    <div class="week-five-item">Card 4</div>
+                    <div class="week-five-item">Card 5</div>
+                </div>
+            </article>
+
+            <article>
+                <h3>6. Flexbox Items: Grow, Shrink, and Basis</h3>
+                <p>Set these properties on the <strong>children</strong>, not the container:</p>
+                <pre><code>.card {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 14rem;
+}
+
+/* The same settings as a shorthand */
+.card {
+    flex: 1 1 14rem;
+}</code></pre>
+                <ul>
+                    <li><code>flex-basis</code> -- The starting main-axis size before free space is distributed. For a row this is usually width; for a column, height.</li>
+                    <li><code>flex-grow</code> -- A unitless share of positive free space. <code>0</code> means do not grow; items with <code>1</code> and <code>2</code> receive free space in a 1-to-2 ratio.</li>
+                    <li><code>flex-shrink</code> -- A unitless factor for giving up space when items are too large. Shrinking is weighted by the basis, so equal factors do not necessarily remove equal numbers of pixels.</li>
+                </ul>
+                <p>For example, in a <code>600px</code> row without gaps, two items with a <code>100px</code> basis leave <code>400px</code> free. With grow factors <code>1</code> and <code>3</code>, they receive <code>100px</code> and <code>300px</code> extra, ending at <code>200px</code> and <code>400px</code>, assuming no min/max constraints. Grow factors divide <em>extra space</em>, not necessarily final widths.</p>
+                <h4>Common flex shorthand values</h4>
+                <ul>
+                    <li><code>flex: 0 1 auto</code> -- The initial behavior: start from the automatic basis, do not grow, but allow shrinking.</li>
+                    <li><code>flex: auto</code> -- Equivalent to <code>1 1 auto</code>; grow and shrink from an automatic basis.</li>
+                    <li><code>flex: none</code> -- Equivalent to <code>0 0 auto</code>; do not grow or shrink.</li>
+                    <li><code>flex: 1</code> -- Browsers expand it to <code>1 1 0%</code>; a common equal-space pattern. Content minimums can still prevent equal sizes, and a percentage basis can behave differently in an indefinite-height column.</li>
+                    <li><code>flex: 1 1 0</code> -- An explicit zero-length basis; useful when you want to share space without using content as the starting size.</li>
+                    <li><code>flex: 0 0 12rem</code> -- A <code>12rem</code> basis with no growth or shrinking. This can overflow a smaller container.</li>
+                </ul>
+                <p><code>flex-basis: auto</code> uses the main-size property, such as <code>width</code> in a row, when that property provides a definite size; otherwise it is content-based. A non-auto basis is used instead of that width or height as the starting flex size. Minimum and maximum sizes still constrain the final result.</p>
+                <h4>Why will an item not shrink?</h4>
+                <pre><code>.card {
+    flex: 1 1 14rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.card pre {
+    overflow-x: auto;
+}</code></pre>
+                <p>Flex items often have an automatic minimum size based on their content. <code>min-width: 0</code> lets an item in a row shrink below that minimum, while wrapping text or scrolling code handles the content itself. In a height-constrained column layout, <code>min-height: 0</code> can solve the equivalent vertical problem.</p>
+            </article>
+
+            <article>
+                <h3>7. Flexbox Recipes: Auto Margins and Vertical Cards</h3>
+                <h4>Push one item to the end of a toolbar</h4>
+                <pre><code>&lt;div class="toolbar"&gt;
+    &lt;span&gt;Project name&lt;/span&gt;
+    &lt;button class="toolbar__action" type="button"&gt;Save&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.toolbar__action {
+    margin-inline-start: auto;
+}</code></pre>
+                <p>In a normal row, the auto margin absorbs available space before the action, pushing it toward the end. Unlike <code>space-between</code>, it can separate a specific item from a group. Auto margins take available space before alignment distributes what is left.</p>
+                <h4>Keep actions at the bottom of a card</h4>
+                <pre><code>.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.card__actions {
+    margin-block-start: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}</code></pre>
+                <p>The card needs extra height for the auto margin to absorb. A Grid gallery that stretches cards to the same row height provides that space naturally. Avoid hard-coded card heights just to line up buttons.</p>
+                <h4>Visual order is not reading order</h4>
+                <p><code>order</code> works on flex and grid items. Its default is <code>0</code>; lower values appear first, with equal values following source order. Reverse directions and <code>order</code> change visual placement, not the logical HTML order or normal keyboard focus order. Write a sensible source order first; do not use CSS reordering to repair confusing markup.</p>
+            </article>
+
+            <article>
+                <h3>8. Grid: Tracks, Lines, Cells, and Areas</h3>
+                <pre><code>&lt;div class="grid"&gt;
+    &lt;div&gt;Card 1&lt;/div&gt;
+    &lt;div&gt;Card 2&lt;/div&gt;
+    &lt;div&gt;Card 3&lt;/div&gt;
+    &lt;div&gt;Card 4&lt;/div&gt;
+    &lt;div&gt;Card 5&lt;/div&gt;
+    &lt;div&gt;Card 6&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}</code></pre>
+                <ul>
+                    <li><strong>Track:</strong> the space between two adjacent grid lines; a column or a row.</li>
+                    <li><strong>Line:</strong> a boundary between tracks. Three columns have four column lines.</li>
+                    <li><strong>Cell:</strong> the intersection of one row and one column.</li>
+                    <li><strong>Area:</strong> a rectangle made from one or more cells.</li>
+                    <li><strong>Explicit grid:</strong> tracks defined by properties such as <code>grid-template-columns</code> and <code>grid-template-rows</code>.</li>
+                    <li><strong>Implicit grid:</strong> extra tracks created when placement needs more space than the explicit grid provides.</li>
+                </ul>
+                <p>By default, Grid places these children across a row, then creates additional rows as needed. Columns remain aligned across those rows, unlike independently wrapping flex lines.</p>
+                <p><strong>Live example: shared column boundaries</strong></p>
+                <div class="week-five-demo week-five-grid-basic">
+                    <div class="week-five-item">Card 1</div>
+                    <div class="week-five-item">Card 2</div>
+                    <div class="week-five-item">Card 3</div>
+                    <div class="week-five-item">Card 4</div>
+                    <div class="week-five-item">Card 5</div>
+                    <div class="week-five-item">Card 6</div>
+                </div>
+            </article>
+
+            <article>
+                <h3>9. Grid: Defining Column and Row Sizes</h3>
+                <pre><code>.dashboard {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    min-height: 30rem;
+    gap: 1rem;
+}</code></pre>
+                <h4>Track sizing values</h4>
+                <ul>
+                    <li><code>14rem</code> or <code>200px</code> -- A fixed track size; useful for a sidebar, but it must still fit the available space.</li>
+                    <li><code>1fr</code> -- One share of leftover space after gaps and other track sizes are accounted for. <code>1fr 2fr</code> shares that space in a 1-to-2 ratio, subject to content minimums.</li>
+                    <li><code>auto</code> -- Content-aware sizing; auto tracks can also stretch when space is available.</li>
+                    <li><code>min-content</code> -- The smallest intrinsic size, often constrained by the longest unbreakable part of the content.</li>
+                    <li><code>max-content</code> -- The intrinsic size without taking optional line breaks; long text can make this very wide.</li>
+                    <li><code>minmax(12rem, 1fr)</code> -- A track with a minimum of <code>12rem</code> and a flexible maximum.</li>
+                    <li><code>minmax(0, 1fr)</code> -- A flexible track that can shrink below its content's automatic minimum. Content still needs wrapping or scrolling.</li>
+                    <li><code>fit-content(20rem)</code> -- A content-sized track with a preferred cap of <code>20rem</code>; its intrinsic minimum can still exceed that cap.</li>
+                </ul>
+                <pre><code>/* Three equal flexible columns */
+grid-template-columns: repeat(3, minmax(0, 1fr));
+
+/* One narrow column and one wider column */
+grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+
+/* Two explicit content-sized rows */
+grid-template-rows: auto auto;
+
+/* Shorthand: rows before the slash, columns after it */
+grid-template: auto auto / repeat(3, minmax(0, 1fr));</code></pre>
+                <p><code>repeat()</code> avoids repeating track definitions manually. <code>grid-template</code> can also include named areas; separate properties are often easier to understand while learning.</p>
+                <p><strong>Common trap:</strong> <code>50% 50%</code> already consumes the container's width, so an added column gap can cause overflow. Two <code>fr</code> tracks share the space <em>after</em> the gap is accounted for.</p>
+            </article>
+
+            <article>
+                <h3>10. Grid Items: Placement, Spans, and Named Lines</h3>
+                <p>Placement belongs on a <strong>grid item</strong>. Start and end values identify boundary lines, not column counts.</p>
+                <pre><code>.featured {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.two-columns {
+    grid-column: span 2;
+}</code></pre>
+                <ul>
+                    <li><code>grid-column: 1 / 3</code> -- Start at line 1 and end at line 3, spanning two columns.</li>
+                    <li><code>grid-row: 1 / 3</code> -- Span two rows in the same way.</li>
+                    <li><code>grid-column: 1 / -1</code> -- Span from the first to the last line of the <strong>explicit</strong> grid. Negative numbers count back from its end, not from the end of extra implicit tracks.</li>
+                    <li><code>span 2</code> -- Occupy two tracks while letting auto-placement choose the starting position.</li>
+                    <li><code>grid-column-start</code>, <code>grid-column-end</code>, <code>grid-row-start</code>, and <code>grid-row-end</code> -- Longhand versions of these settings.</li>
+                </ul>
+                <h4>Named lines and grid-area shorthand</h4>
+                <pre><code>.layout {
+    display: grid;
+    grid-template-columns:
+        [sidebar-start] 14rem
+        [content-start] minmax(0, 1fr) [content-end];
+}
+
+.content {
+    grid-column: content-start / content-end;
+}
+
+.featured {
+    /* row-start / column-start / row-end / column-end */
+    grid-area: 1 / 1 / 3 / 3;
+}</code></pre>
+                <p>Named lines make placement easier to read. <code>grid-area</code> can use four line values as above, or a single named area as in the next example.</p>
+                <p>Explicitly placing two items in the same area can make them overlap. That is useful for a deliberate image-and-caption layer, but it is not automatic collision avoidance. Check placement and use <code>z-index</code> only when layering is intentional.</p>
+            </article>
+
+            <article>
+                <h3>11. Grid: Page Layouts with Named Areas</h3>
+                <pre><code>&lt;div class="page-grid"&gt;
+    &lt;div class="page-grid__top"&gt;Top bar&lt;/div&gt;
+    &lt;aside class="page-grid__sidebar"&gt;Sidebar&lt;/aside&gt;
+    &lt;div class="page-grid__content"&gt;Main content&lt;/div&gt;
+    &lt;div class="page-grid__bottom"&gt;Bottom bar&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.page-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "top"
+        "sidebar"
+        "content"
+        "bottom";
+    gap: 1rem;
+}
+
+.page-grid__top { grid-area: top; }
+.page-grid__sidebar { grid-area: sidebar; }
+.page-grid__content { grid-area: content; min-width: 0; }
+.page-grid__bottom { grid-area: bottom; }
+
+@media (min-width: 48rem) {
+    .page-grid {
+        grid-template-columns: 14rem minmax(0, 1fr);
+        grid-template-areas:
+            "top top"
+            "sidebar content"
+            "bottom bottom";
+    }
+}</code></pre>
+                <ul>
+                    <li>Each quoted string describes a row. Every row must have the same number of cells.</li>
+                    <li>Repeating a name makes that area span cells. Every named area must form a rectangle; L-shaped areas are invalid.</li>
+                    <li>A dot, such as <code>"sidebar ."</code>, represents an unnamed cell.</li>
+                    <li>Names are chosen by you, and the item's <code>grid-area</code> must match.</li>
+                    <li>Change the area map in a media query without changing the HTML. Keep the visual sequence consistent with the reading order.</li>
+                </ul>
+                <p><strong>Live example: one column on a narrow screen, sidebar and content on a wider screen</strong></p>
+                <div class="week-five-demo week-five-areas">
+                    <div class="week-five-item week-five-areas__top">Top bar</div>
+                    <div class="week-five-item week-five-areas__sidebar">Sidebar</div>
+                    <div class="week-five-item week-five-areas__content">Main content</div>
+                    <div class="week-five-item week-five-areas__bottom">Bottom bar</div>
+                </div>
+            </article>
+
+            <article>
+                <h3>12. Grid: Automatic Placement and Implicit Tracks</h3>
+                <pre><code>.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(8rem, auto);
+    grid-auto-flow: row;
+    gap: 1rem;
+}</code></pre>
+                <ul>
+                    <li><code>grid-auto-flow: row</code> -- The default: auto-place across rows, adding rows as needed.</li>
+                    <li><code>grid-auto-flow: column</code> -- Auto-place down columns, adding columns as needed. Usually define rows first for this pattern.</li>
+                    <li><code>grid-auto-rows</code> -- Size automatically created rows. <code>minmax(8rem, auto)</code> gives them a minimum while allowing content to increase their height.</li>
+                    <li><code>grid-auto-columns</code> -- Size automatically created columns.</li>
+                    <li><code>grid-auto-flow: row dense</code> -- Look back for gaps that later items can fill.</li>
+                </ul>
+                <p>Without <code>dense</code>, auto-placement generally advances instead of going back to fill earlier holes. With <code>dense</code>, the visual order can differ from the source order. Avoid it for content whose sequence matters or where keyboard navigation would become confusing.</p>
+                <p>If you accidentally place an item at <code>grid-column: 5</code> in a three-column layout, Grid can create additional implicit columns. Unexpected extra tracks are often a placement mistake, not a reason to give the container a bigger width.</p>
+                <p><code>grid</code> is a broader shorthand than <code>grid-template</code>: it can also configure or reset implicit-grid settings. Prefer explicit longhand properties until you understand which settings a shorthand resets.</p>
+            </article>
+
+            <article>
+                <h3>13. Grid: Align Items or Align the Whole Grid?</h3>
+                <p>In normal horizontal writing, <strong>justify</strong> works along the inline axis (usually horizontal), and <strong>align</strong> works along the block axis (usually vertical). Unlike Flexbox, these Grid axes do not switch based on a <code>flex-direction</code>.</p>
+                <div class="week-five-table" role="region" aria-label="Grid alignment properties" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Property</th>
+                                <th scope="col">Where?</th>
+                                <th scope="col">What does it move?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row"><code>justify-items</code> / <code>align-items</code></th><td>Container</td><td>All items inside their own grid areas.</td></tr>
+                            <tr><th scope="row"><code>justify-self</code> / <code>align-self</code></th><td>One item</td><td>That item inside its grid area.</td></tr>
+                            <tr><th scope="row"><code>justify-content</code> / <code>align-content</code></th><td>Container</td><td>The collection of tracks inside the container when there is free space.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pre><code>.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 6rem);
+    grid-auto-rows: 5rem;
+    min-height: 18rem;
+    gap: 1rem;
+    place-items: center;
+    place-content: center;
+}
+
+.special {
+    place-self: end start;
+}</code></pre>
+                <ul>
+                    <li><code>place-items</code> -- Shorthand for <code>align-items</code>, then <code>justify-items</code>.</li>
+                    <li><code>place-content</code> -- Shorthand for <code>align-content</code>, then <code>justify-content</code>.</li>
+                    <li><code>place-self</code> -- Shorthand for <code>align-self</code>, then <code>justify-self</code>.</li>
+                    <li>A single value applies to both parts. <code>place-self: end start</code> aligns at the block end and inline start.</li>
+                </ul>
+                <p>Item alignment commonly uses <code>start</code>, <code>end</code>, <code>center</code>, <code>stretch</code>, or <code>baseline</code>. Content alignment also supports space distribution such as <code>space-between</code> and <code>space-evenly</code>.</p>
+                <p>Tracks sized with <code>fr</code> often already use all the available space, so centering the whole grid may have no visible effect. Grid items normally stretch when their dimensions allow it; items with an intrinsic aspect ratio, such as images, can behave differently. <code>text-align: center</code> only centers inline content inside a box, not the box in its grid area.</p>
+            </article>
+
+            <article>
+                <h3>14. Responsive Grid: repeat(), auto-fit, and auto-fill</h3>
+                <h4>Adapt to available width without fixed breakpoints</h4>
+                <pre><code>.gallery {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+}</code></pre>
+                <ul>
+                    <li><code>repeat(auto-fit, ...)</code> -- Create as many columns as fit, then collapse empty repeated tracks so occupied columns can expand.</li>
+                    <li><code>minmax(..., 1fr)</code> -- Give each column a minimum and allow it to share leftover space.</li>
+                    <li><code>min(100%, 14rem)</code> -- Use <code>14rem</code> as the minimum when possible, but let it drop to the container width on a very narrow screen.</li>
+                </ul>
+                <h4>auto-fit versus auto-fill</h4>
+                <p><code>auto-fill</code> keeps the repeated tracks even when some are empty. <code>auto-fit</code> collapses empty ones. The difference is most visible when the container can fit more columns than there are items; with enough items to occupy every track, the results often look identical.</p>
+                <p>Neither value automatically makes a short last row fill the whole width if its columns are occupied elsewhere in the grid. That is different from a wrapping flex row.</p>
+                <p><strong>Live example: an adaptive card grid</strong></p>
+                <div class="week-five-demo week-five-grid-auto">
+                    <div class="week-five-item">Responsive card 1</div>
+                    <div class="week-five-item">Responsive card 2</div>
+                    <div class="week-five-item">Responsive card 3</div>
+                    <div class="week-five-item">Responsive card 4</div>
+                    <div class="week-five-item">Responsive card 5</div>
+                </div>
+                <h4>Use media queries for deliberate layout changes</h4>
+                <pre><code>.gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 48rem) {
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 64rem) {
+    .gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}</code></pre>
+                <p>Choose the automatic pattern when column count should follow available room. Choose media queries when the design needs a specific arrangement. Container queries are another option when a reusable component should respond to its container's width rather than the whole viewport.</p>
+            </article>
+
+            <article>
+                <h3>15. Combine Grid and Flexbox in a Real Component</h3>
+                <pre><code>&lt;div class="products"&gt;
+    &lt;article class="product"&gt;
+        &lt;h4&gt;Starter plan&lt;/h4&gt;
+        &lt;p&gt;A short description.&lt;/p&gt;
+        &lt;div class="product__actions"&gt;
+            &lt;button type="button"&gt;Choose plan&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
+    &lt;article class="product"&gt;
+        &lt;h4&gt;Team plan&lt;/h4&gt;
+        &lt;p&gt;A longer description that wraps onto more lines.
+        Cards can contain different amounts of text.&lt;/p&gt;
+        &lt;div class="product__actions"&gt;
+            &lt;button type="button"&gt;Choose plan&lt;/button&gt;
+            &lt;button type="button"&gt;Details&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+                <pre><code>.products {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #65686d;
+    overflow-wrap: anywhere;
+}
+
+.product h4,
+.product p {
+    margin: 0;
+}
+
+.product__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-start: auto;
+}</code></pre>
+                <p>Grid manages the columns and stretches cards within each row. Flexbox stacks each card's content, and the auto margin pushes its actions to the bottom. The actions use a second flex container so they can wrap on narrow screens. No fixed card height is needed.</p>
+                <p><strong>Live example:</strong> action labels below are non-interactive placeholders, so the demo does not pretend to submit or select anything.</p>
+                <div class="week-five-demo week-five-products">
+                    <article class="week-five-product">
+                        <h4>Starter plan</h4>
+                        <p>A short description.</p>
+                        <div class="week-five-product__actions"><span>Choose plan</span></div>
+                    </article>
+                    <article class="week-five-product">
+                        <h4>Team plan</h4>
+                        <p>A longer description that wraps onto more lines. Cards can contain different amounts of text while their actions remain aligned within the same row.</p>
+                        <div class="week-five-product__actions"><span>Choose plan</span><span>Details</span></div>
+                    </article>
+                </div>
+            </article>
+
+            <article>
+                <h3>16. Advanced Grid: Nested Grids and subgrid</h3>
+                <p>An ordinary nested grid defines its own tracks independently. <code>subgrid</code> lets a nested grid reuse the parent tracks that it spans, so content inside different cards can line up with the same outer boundaries.</p>
+                <pre><code>.comparison {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+}
+
+.comparison__card {
+    display: grid;
+    gap: 1rem;
+}
+
+@supports (grid-template-rows: subgrid) {
+    .comparison__card {
+        grid-row: span 3;
+        grid-template-rows: subgrid;
+    }
+}</code></pre>
+                <p>Use a card with three direct children: a heading, a description, and an action group. Each card spans three parent rows and shares those row tracks. The headings, descriptions, and actions can then align across neighboring cards, even when the text lengths differ.</p>
+                <p><code>grid-template-columns: subgrid</code> shares column tracks instead. Subgrid is supported in modern browsers; check the project's supported versions. The <code>@supports</code> condition above keeps a simple independent grid as a fallback.</p>
+            </article>
+
+            <article>
+                <h3>17. Common Mistakes and How to Debug Them</h3>
+                <div class="week-five-table" role="region" aria-label="Flexbox and Grid troubleshooting" tabindex="0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Problem</th>
+                                <th scope="col">What to check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">The layout property does nothing.</th><td>Is <code>display: flex</code> or <code>grid</code> on the correct parent? Is the target a direct child? Is another rule overriding yours?</td></tr>
+                            <tr><th scope="row">Centering does not appear to work.</th><td>Check the axes and whether there is free space. For Grid, distinguish item alignment from track alignment.</td></tr>
+                            <tr><th scope="row">Flex items stay on one line.</th><td>Add <code>flex-wrap: wrap</code>. Check the basis and available width; wrapping is not the default.</td></tr>
+                            <tr><th scope="row">align-content has no effect in Flexbox.</th><td>Use a wrapping container and leave extra cross-axis space. It is not a substitute for <code>align-items</code>.</td></tr>
+                            <tr><th scope="row">A long word makes the page too wide.</th><td>Check automatic minimum sizes: use <code>min-width: 0</code> on the item, <code>minmax(0, 1fr)</code> for flexible grid tracks, and wrapping or scrolling for the content.</td></tr>
+                            <tr><th scope="row">Two 50% columns overflow.</th><td>The gap adds width on top of those percentages. Use flexible tracks such as <code>repeat(2, minmax(0, 1fr))</code>.</td></tr>
+                            <tr><th scope="row">A span creates extra columns on mobile.</th><td>A two-column span cannot fit a one-column explicit grid. Apply the span only at a suitable breakpoint.</td></tr>
+                            <tr><th scope="row">Grid items overlap.</th><td>Check explicit line placement or named areas. Two items can be assigned to the same cells.</td></tr>
+                            <tr><th scope="row">Keyboard focus seems to jump around.</th><td>Remove unnecessary <code>order</code>, reverse directions, or dense placement. Keep source and visual order consistent.</td></tr>
+                            <tr><th scope="row">Text is clipped inside a card.</th><td>Remove unnecessary fixed heights. Prefer content-sized rows or <code>minmax(..., auto)</code>, and test longer text and zoom.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>A practical DevTools checklist</h4>
+                <ol>
+                    <li>Inspect the container in the Elements or Inspector panel and confirm its computed <code>display</code>.</li>
+                    <li>Enable the Flexbox or Grid overlay to see axes, track boundaries, gaps, and line numbers.</li>
+                    <li>Inspect the child and check its basis, min/max sizes, placement, and inherited or overridden rules.</li>
+                    <li>Temporarily toggle one declaration at a time rather than adding random offsets.</li>
+                    <li>Test narrow and wide viewports, longer content, keyboard navigation, and at least 200% zoom.</li>
+                    <li>Copy successful changes back into the stylesheet; DevTools edits disappear on refresh.</li>
+                </ol>
+            </article>
+
+            <article>
+                <h3>18. Quick Reference and Further Reading</h3>
+                <h4>Flexbox container</h4>
+                <p><code>display: flex</code>, <code>flex-direction</code>, <code>flex-wrap</code>, <code>flex-flow</code>, <code>justify-content</code>, <code>align-items</code>, <code>align-content</code>, <code>gap</code>.</p>
+                <h4>Flexbox item</h4>
+                <p><code>flex</code>, <code>flex-grow</code>, <code>flex-shrink</code>, <code>flex-basis</code>, <code>align-self</code>, <code>order</code>, auto margins, and min/max dimensions.</p>
+                <h4>Grid container</h4>
+                <p><code>display: grid</code>, <code>grid-template-columns</code>, <code>grid-template-rows</code>, <code>grid-template-areas</code>, <code>grid-template</code>, <code>grid-auto-flow</code>, <code>grid-auto-columns</code>, <code>grid-auto-rows</code>, <code>grid</code>, <code>gap</code>, item alignment, and content alignment.</p>
+                <h4>Grid item</h4>
+                <p><code>grid-column</code>, <code>grid-row</code>, their start/end longhands, <code>grid-area</code>, <code>justify-self</code>, <code>align-self</code>, <code>place-self</code>, <code>order</code>, and min/max dimensions.</p>
+                <ul>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox">MDN: Basic concepts of Flexbox</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout">MDN: Basic concepts of Grid layout</a></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid">MDN: Subgrid</a></li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Summary</h3>
+                <p><strong>Flexbox:</strong> choose a main direction, decide whether items wrap, align them on the appropriate axes, and control how each item grows or shrinks. <strong>Grid:</strong> define tracks, place items by lines or areas, and distinguish alignment inside cells from alignment of the whole grid. Combine both tools, preserve a logical HTML order, handle content minimums, and test layouts with different widths and real content instead of relying on fixed sizes.</p>
             </article>
         </section>
     </main>

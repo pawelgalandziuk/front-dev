@@ -131,7 +131,8 @@ article {
     }
 }
 
-#third-week {
+#third-week,
+#fifth-week {
     line-height: 1.6;
     overflow-wrap: anywhere;
 
@@ -157,8 +158,119 @@ article {
     }
 }
 
-.week-three-table {
+.week-three-table,
+.week-five-table {
     overflow-x: auto;
+}
+
+.week-five-demo {
+    max-width: 60rem;
+    padding: 1rem;
+    border: 1px dashed var(--gray-test-color);
+    background-color: #dce6f2;
+}
+
+.week-five-item {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--gray-test-color);
+    background-color: #fff;
+}
+
+.week-five-flex-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.week-five-flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    > div {
+        flex: 1 1 14rem;
+    }
+}
+
+.week-five-grid-basic {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.week-five-grid-auto,
+.week-five-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: 1rem;
+}
+
+.week-five-areas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "top"
+        "sidebar"
+        "content"
+        "bottom";
+    gap: 1rem;
+}
+
+.week-five-areas__top {
+    grid-area: top;
+}
+
+.week-five-areas__sidebar {
+    grid-area: sidebar;
+}
+
+.week-five-areas__content {
+    grid-area: content;
+}
+
+.week-five-areas__bottom {
+    grid-area: bottom;
+}
+
+#fifth-week .week-five-product {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    padding: 1rem;
+    gap: 1rem;
+    border: 1px solid var(--gray-test-color);
+    background-color: #fff;
+
+    h4,
+    p {
+        margin: 0;
+    }
+}
+
+.week-five-product__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block-start: auto;
+
+    span {
+        padding: 0.5rem 0.75rem;
+        background-color: #145db1;
+        color: #fff;
+    }
+}
+
+@media (min-width: 48rem) {
+    .week-five-areas {
+        grid-template-columns: 14rem minmax(0, 1fr);
+        grid-template-areas:
+            "top top"
+            "sidebar content"
+            "bottom bottom";
+    }
 }
 
 .week-three-grid {
